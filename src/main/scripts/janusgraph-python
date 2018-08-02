@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+
+
+from gremlin_python.structure.graph import Graph
+from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection
+
+if __name__ == '__main__':
+    URL = 'ws://10.153.22.172:8182/gremlin'
+    graph = Graph()
+    g = graph.traversal().withRemote(DriverRemoteConnection(URL, "gOLTP"))
+    count = g.V().count().next()
+    print("Counting vertices")
+    print(count)
+
