@@ -19,7 +19,7 @@ before_deploy:
 deploy:
   provider: pypi
   user: debasishdebs
-  server: https://test.pypi.org/legacy # Remove for deployment to official PyPi repo
+  server: https://test.pypi.org/ # Remove for deployment to official PyPi repo
   password: 2NInitu!!
   skip_cleanup: true
   on:
