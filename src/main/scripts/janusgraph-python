@@ -3,12 +3,19 @@
 
 from gremlin_python.structure.graph import Graph
 from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection
+from gremlin_python.process.traversal import P
+from JanusGraphP import JanusGraphP as JP
 
 if __name__ == '__main__':
     URL = 'ws://10.153.22.172:8182/gremlin'
     graph = Graph()
     g = graph.traversal().withRemote(DriverRemoteConnection(URL, "gOLTP"))
     count = g.V().count().next()
+    countInter = g.V().has("partyID", P.gt(100)).count().next()
+    countJ = g.V().has("partyID", JP.gt("100")).count().next()
     print("Counting vertices")
     print(count)
-
+    print("Testing predicate 1")
+    print(countInter)
+    print("Testing predicate 2")
+    print(countJ)
