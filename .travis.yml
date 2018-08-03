@@ -1,13 +1,19 @@
 language: python
 python:
   - "3.5"
-#  - "3.6"
 # command to install pybuilder
 before_script:
   - pip install pybuilder
-# Run pybuilder build.py
-#script: python build.py
+# Run pybuilder (pyb)
 script: pyb
 branches:
   only:
     - master
+
+deploy:
+  provider: pypi
+  user: debasishdebs
+  server: https://testpypi.python.org/pypi # Remove for deployment to official PyPi repo
+  password: 2NInitu!!
+  on:
+    branch: master
