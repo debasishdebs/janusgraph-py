@@ -14,6 +14,7 @@ before_deploy:
 #  - cd ~/
 #  - cd target/dist/janusgraph-python-0.0.1
   - pwd
+  - cd target/dist
   - ls
 deploy:
   provider: pypi
