@@ -1,12 +1,13 @@
 language: python
 python:
   - "3.5"
-  - "3.6"
-# command to install dependencies
+#  - "3.6"
+# command to install pybuilder
 before_script:
   - pip install pybuilder
-script: python build.py
-#script: pyb
+# Run pybuilder build.py
+#script: python build.py
+script: pyb
 branches:
   only:
     - master
