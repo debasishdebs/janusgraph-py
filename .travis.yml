@@ -11,13 +11,15 @@ branches:
     - master
 
 before_deploy:
-  - cd ~/
+#  - cd ~/
 #  - cd target/dist/janusgraph-python-0.0.1
+  - pwd
   - ls
 deploy:
   provider: pypi
   user: debasishdebs
   server: https://testpypi.python.org/pypi # Remove for deployment to official PyPi repo
   password: 2NInitu!!
+  skip_cleanup: true
   on:
     branch: master
