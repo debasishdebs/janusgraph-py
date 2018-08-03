@@ -3,6 +3,8 @@ python:
   - "3.5"
   - "3.6"
 # command to install dependencies
+before_script:
+  - pip install pybuilder
 script: python build.py
 #script: pyb
 branches:
