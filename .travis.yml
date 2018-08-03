@@ -12,7 +12,7 @@ branches:
 
 before_deploy:
   - cd ~/
-  - cd target/dist/janusgraph-python-0.0.1
+#  - cd target/dist/janusgraph-python-0.0.1
   - ls
 deploy:
   provider: pypi
