@@ -1,26 +1,21 @@
 language: python
 python:
-  - "3.5"
-# command to install pybuilder
+- '3.5'
 before_script:
-  - pip install pybuilder
-# Run pybuilder (pyb)
+- pip install pybuilder
 script: pyb
 branches:
   only:
-    - master
-
+  - master
 before_deploy:
-#  - cd ~/
-#  - cd target/dist/janusgraph-python-0.0.1
-  - pwd
-  - cd target/dist/janusgraph-python-0.0.1
-  - ls
+- pwd
+- cd target/dist/janusgraph-python-0.0.1
+- ls
 deploy:
   provider: pypi
   user: debasishdebs
-  server: https://test.pypi.org/legacy/ # Remove for deployment to official PyPi repo
-  password: 2NInitu!!
+  server: https://test.pypi.org/legacy/
+  password: LMCTIsDJ4ertnASBaEbTcsS5CDv9puVj/0q2wVlFFPhhKdi4ZcyIMBI9ppBkJXY5Z9PJPPdPuh7eKpQ0a8Di4Nad58uCdcvTSQ1ceijOfgV7dONIkO3QTRmi/gPk0tI3R9ZfNQryyi6WAGkksMO0i9sQGoo4zEtCpo+hKtvCZBmzG/YrN9kiCTDY/v/O7Tsme+xS7Ir8/C3YQON7ko/qT0G+deXfsvYUXaEXzcid0SBHNIbhET0cEEot6E4s87thY6RStJk7ZfQCOzKGIofSpZ1+qk/zF8TDjJqwzS6MC5si4rQN1YaKYw04aGTgWKzx56o8ubrX49TRv8Tjw3xW5k42fMvAkldpyYzliUnQdekSlWsivrj3JoGZRP/gjYtq8+jvOILRUSVifSe/5frdaTy1AMJXayqwOjFhDcMA+Vyvoc7lMOAs0sldRlIOAgmnYAo6lo22mdpHHYwSula0lK8GgBLG83YxiBnJY/lUOsjIVi1YmIU24MlKW2TaQmO4oC0qN5Ut1ihtqFtDgj2Na3z4ZAw/hghhmN1C21ZGMAeOncmXnYGddDKPSkw8CYep3yibfnIEwozxRRElGbxoChA8S5ZusI4/fB0PsPwV8rbDBODrGd8wdPYD28tOAG8HmDJt41vreh5P0hx0ZlssFTDB2ELNcEFrdKnV/koaV1A=
   skip_cleanup: true
   on:
     branch: master
