@@ -23,4 +23,4 @@ class JanusGraphP(P):
 
 def textContains(*args):
     return JanusGraphP.textContains(*args)
-statics.add_static('between', textContains)
+statics.add_static('textContains', textContains)
