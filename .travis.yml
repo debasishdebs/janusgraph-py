@@ -8,9 +8,7 @@ branches:
   only:
   - master
 before_deploy:
-- pwd
-- cd target/dist/janusgraph-python-0.0.1
-- ls
+  - cd target/dist/janusgraph-python-0.0.1
 deploy:
   provider: pypi
   user: debasishdebs
