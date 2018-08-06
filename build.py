@@ -31,5 +31,6 @@ default_task = ['clean', 'install_dependencies', 'publish']
 def initialize(project):
     # Nothing happens here yet, but notice the `project` argument which is automatically injected.
     project.set_property("coverage_break_build", False)  # default is True
+    project.set_property("dir_dist", "target/dist/" + project.name)
     project.depends_on("gremlinpython", "=={}".format(tinkerpop_version))
     pass

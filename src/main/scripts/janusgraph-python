@@ -4,15 +4,19 @@
 from gremlin_python.structure.graph import Graph
 from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection
 from gremlin_python.process.traversal import P
+from gremlin_python.driver.serializer import GraphSONMessageSerializer
+from gremlin_python.driver.serializer import GraphSONSerializersV2d0
 from JanusGraphP import JanusGraphP as JP
 
 if __name__ == '__main__':
     URL = 'ws://10.153.22.172:8182/gremlin'
+    serializer = GraphSONMessageSerializer()
+    # serializer = GraphSONSerializersV2d0()
     graph = Graph()
-    g = graph.traversal().withRemote(DriverRemoteConnection(URL, "gOLTP"))
+    g = graph.traversal().withRemote(DriverRemoteConnection(URL, "gOLTP", message_serializer=serializer))
     count = g.V().count().next()
     countInter = g.V().has("partyID", P.gt(100)).count().next()
-    countJ = g.V().has("partyID", JP.gt("100")).count().next()
+    countJ = g.V().has("partyID", JP.textContains("100")).count().next()
     print("Counting vertices")
     print(count)
     print("Testing predicate 1")
