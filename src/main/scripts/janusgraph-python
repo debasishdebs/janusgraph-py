@@ -6,20 +6,27 @@ from gremlin_python.driver.driver_remote_connection import DriverRemoteConnectio
 from gremlin_python.process.traversal import P
 from gremlin_python.driver.serializer import GraphSONMessageSerializer
 from gremlin_python.driver.serializer import GraphSONSerializersV2d0
-from JanusGraphP import JanusGraphP as JP
+from process.Text import Text
 
 if __name__ == '__main__':
     URL = 'ws://10.153.22.172:8182/gremlin'
-    serializer = GraphSONMessageSerializer()
+    # serializer = GraphSONMessageSerializer()
     # serializer = GraphSONSerializersV2d0()
     graph = Graph()
-    g = graph.traversal().withRemote(DriverRemoteConnection(URL, "gOLTP", message_serializer=serializer))
+    t = Text()
+    g = graph.traversal().withRemote(DriverRemoteConnection(URL, "gOLTP"))
     count = g.V().count().next()
     countInter = g.V().has("partyID", P.gt(100)).count().next()
-    countJ = g.V().has("partyID", JP.textContains("100")).count().next()
+    countJ = g.V().has("partyID", t.textContains("100")).count().next()
+
+    count1 = g.V().has("partyID", t.textContains("100")).count().next()
+    count2 = g.V().has("partyID", t.textFuzzy("100")).count().next()
+    count3 = g.V().has("partyID", t.textContainsPrefix("11")).count().next()
     print("Counting vertices")
     print(count)
     print("Testing predicate 1")
-    print(countInter)
+    print(count1)
     print("Testing predicate 2")
-    print(countJ)
+    print(count2)
+    print("Testing predicate 3")
+    print(count3)
