@@ -1,5 +1,4 @@
 # Name: Debasish Kanhar
-# Emp ID: 05222V
 
 
 from gremlin_python.process.traversal import P

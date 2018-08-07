@@ -1,5 +1,4 @@
 # Name: Debasish Kanhar
-# Emp ID: 05222V
 
 from gremlin_python.process.traversal import P
 
@@ -8,30 +7,37 @@ class Text(object):
     def __init__(self):
         pass
 
-    def textContains(self, value):
+    @staticmethod
+    def textContains(value):
         predicate = P("textContains", value)
         return predicate
 
-    def textContainsPrefix(self, value):
+    @staticmethod
+    def textContainsPrefix(value):
         predicate = P("textContainsFuzzy", value)
         return predicate
 
-    def textPrefix(self, value):
+    @staticmethod
+    def textPrefix(value):
         predicate = P("textPrefix", value)
         return predicate
 
-    def textContainsRegex(self, value):
+    @staticmethod
+    def textContainsRegex(value):
         predicate = P("textContainsPrefix", value)
         return predicate
 
-    def textRegex(self, value):
+    @staticmethod
+    def textRegex(value):
         predicate = P("textRegex", value)
         return predicate
 
-    def textFuzzy(self, value):
+    @staticmethod
+    def textFuzzy(value):
         predicate = P("textFuzzy", value)
         return predicate
 
-    def textContainsFuzzy(self, value):
+    @staticmethod
+    def textContainsFuzzy(value):
         predicate = P("textContainsFuzzy", value)
         return predicate
