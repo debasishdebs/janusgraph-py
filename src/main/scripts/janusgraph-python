@@ -3,33 +3,68 @@
 
 from gremlin_python.structure.graph import Graph
 from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection
-from gremlin_python.process.traversal import P
-from janusgraph_python.core.attribute.Text import Text
+from janusgraph_python.core.attribute.TextPredicate.Text import Text
+from janusgraph_python.core.datatypes.Point import Point
+from janusgraph_python.core.datatypes.Circle import Circle
+from janusgraph_python.serializer.GraphsonReader import JanusGraphSONReader
+from janusgraph_python.serializer.GraphsonWriter import JanusGraphSONWriter
+from janusgraph_python.core.attribute.GeoPredicate.Geo import Geo
+from gremlin_python.driver.protocol import GremlinServerError
+
 
 if __name__ == '__main__':
     URL = 'ws://10.153.22.172:8182/gremlin'
-    # serializer = GraphSONMessageSerializer()
-    # serializer = GraphSONSerializersV2d0()
+
     graph = Graph()
     # t = Text()
-    g = graph.traversal().withRemote(DriverRemoteConnection(URL, "gOLTP"))
-    count = g.V().count().next()
-    countInter = g.V().has("partyID", P.gt(100)).count().next()
-    countJ = g.V().has("songType", Text.textContains("cover")).count().next()
+    graphson_reader = JanusGraphSONReader().build()
+    graphson_writer = JanusGraphSONWriter().build()
 
-    count1 = g.V().has("songType", Text.textContains("cover")).count().next()
-    count2 = g.V().has("songType", Text.textFuzzy("cover")).count().next()
-    count3 = g.V().has("songType", Text.textContainsPrefix("cov")).count().next()
+    remote_connection = DriverRemoteConnection(URL, "gg",
+                                                    graphson_reader=graphson_reader, graphson_writer=graphson_writer)
+    g = graph.traversal().withRemote(remote_connection)
+    count = g.V().count().next()
+
+    count1 = g.V().has("name", Text.textContains("cerb")).count().next()
+    count2 = g.V().has("name", Text.textFuzzy("cerbrus")).count().next()
+
     print("Counting vertices")
     print(count)
     print("Testing predicate 1")
     print(count1)
     print("Testing predicate 2")
     print(count2)
-    print("Testing predicate 3")
-    print(count3)
 
-    edges = g.V(12336).outE().toList()
+    # Next up would be adding a property with GeoShape data type back to JanusGraph
+    # Add a new node of type monster named Stymphalian birds.
 
-    print("Edge Value Map")
+    countBull = g.V().has("name", "Erymanthian Boar").count().next()
+    print(countBull)
+    if countBull >= 1:
+        bull = g.V().has("name", "Erymanthian Boar").next()
+    else:
+        bull = g.addV("monster").property("name", "Erymanthian Boar").next()
+
+    # Retrive hercules node, so that we can add a new edge to it.
+    hercules = g.V().has("name", Text.textContainsFuzzy("herculeas")).next()
+    # Now we add edge b/w the vertices created and retrieved.
+    # Since we are going to add a GeoShape point specifying where the battle happened,
+    # First let us create the GeoShape obj
+
+    # We define arcadia point by its lat and long
+    erymanthos = Point(30.58, 20.50)
+    # We add arcadia POINT to our newly created edge.
+    edgeAdded = g.V(bull).as_("to").V(hercules).addE("battled").property("time", 4).property("place", erymanthos).to("to").next()
+    print(edgeAdded)
+    print("Was edge added")
+
+    print("Testing retrival of GeoShapes")
+    edgesH = g.V().has("name", Text.textContainsFuzzy("herculeas")).outE("battled").valueMap("place").toList()
+    print(edgesH)
+
+    # Next I'm going to test GeoPredicates
+    # shape = Circle(37.97, 23.72, 5000)
+    point = Circle(22, 39, 50)
+    edges = g.E().has("place", Geo.geoWithin(point)).valueMap(True).toList()
+    print("Edges etrived using Geo Predicates")
     print(edges)
