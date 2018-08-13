@@ -29,20 +29,35 @@ class toGeoJSON(object):
             geoJSON (dict)
         """
 
-        self.geoJSON["type"] = self.GEOMETRY_TYPE
-        self.geoJSON["coordinates"] = list()
+        if self.GEOMETRY_TYPE.lower() == "point":
+            self.geoJSON["type"] = self.GEOMETRY_TYPE
+            self.geoJSON["coordinates"] = list()
 
-        coordinates = self.shape.getCoordinates()
+            coordinates = self.shape.getCoordinates()
 
-        coordinateJSON = self.__serialize_coordinates_to_geo_json(coordinates)
-        self.geoJSON["coordinates"] = coordinateJSON
+            coordinateJSON = self.__serialize_coordinates_to_geo_json(coordinates)
+            self.geoJSON["coordinates"] = coordinateJSON
 
-        if self.shapeStr == "CIRCLE":
+        else:
+            # self.geoJSON["geometry"] = dict()
+
+            geometryData = dict()
+
+            geometryData["type"] = self.GEOMETRY_TYPE
+            geometryData["coordinates"] = list()
+
+            coordinates = self.shape.getCoordinates()
+
+            coordinateJSON = self.__serialize_coordinates_to_geo_json(coordinates)
+            geometryData["coordinates"] = coordinateJSON
+
             radius = self.shape.getRadius()
-            self.geoJSON["radius"] = self.__serialize_radius_to_geo_json(radius)
+            geometryData["radius"] = self.__serialize_radius_to_geo_json(radius)
 
-            self.geoJSON["properties"] = dict()
-            self.geoJSON["properties"]["radius_units"] = "km"
+            geometryData["properties"] = dict()
+            geometryData["properties"]["radius_units"] = "km"
+
+            self.geoJSON["geometry"] = geometryData
 
         return self.geoJSON
 

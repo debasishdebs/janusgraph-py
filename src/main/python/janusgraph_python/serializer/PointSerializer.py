@@ -2,7 +2,7 @@
 
 from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
 from janusgraph_python.core.datatypes.Point import Point
-from janusgraph_python.serializer.toGeoJSON import toGeoJSON
+from janusgraph_python.utils.toGeoJSON import toGeoJSON
 
 
 class PointSerializer(object):
@@ -56,7 +56,8 @@ class PointSerializer(object):
         #                                          cls.GRAPHSON_PREFIX)
 
         serializedJSON = GraphSONUtil.typedValue(cls.GRAPHSON_BASE_TYPE, geometryJSON, cls.GRAPHSON_PREFIX)
-
+        # print("Serialized json on point being called ")
+        # print(serializedJSON)
         return serializedJSON
 
     @classmethod

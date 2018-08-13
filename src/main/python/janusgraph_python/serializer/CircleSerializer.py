@@ -2,7 +2,8 @@
 
 from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
 from janusgraph_python.core.datatypes.Circle import Circle
-from janusgraph_python.serializer.toGeoJSON import toGeoJSON
+from janusgraph_python.utils.toGeoJSON import toGeoJSON
+import pprint
 
 
 class CircleSerializer(object):
@@ -33,8 +34,8 @@ class CircleSerializer(object):
         #                                          cls.GRAPHSON_PREFIX)
 
         serializedJSON = GraphSONUtil.typedValue(cls.GRAPHSON_BASE_TYPE, geometryJSON, cls.GRAPHSON_PREFIX)
-        print("Serialised JSON is being called.")
-        print(serializedJSON)
+        # print("Serialised JSON on Circle is being called.")
+        # pprint.pprint(serializedJSON)
         return serializedJSON
 
     @classmethod

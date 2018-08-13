@@ -53,5 +53,5 @@ class Point(object):
         return (self.getLatitude().__hash__()*397) ^ (self.getLongitude().__hash__())
 
     def toString(self):
-        point = "Geoshape.point"
+        point = "POINT(lat: {}, lon: {})".format(self.getLatitude(), self.getLongitude())
         return point

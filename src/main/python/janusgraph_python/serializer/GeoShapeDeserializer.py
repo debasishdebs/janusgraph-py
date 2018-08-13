@@ -3,11 +3,13 @@
 from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
 from janusgraph_python.core.datatypes.Point import Point
 from janusgraph_python.core.datatypes.Circle import Circle
+import pprint
 
 
 class GeoShapeDeserializer(object):
     GRAPHSON_PREFIX = "janusgraph"
     GRAPHSON_BASE_TYPE = "Geoshape"
+    VALUE_KEY = "@value"
     GRAPHSON_TYPE = GraphSONUtil.formatType(GRAPHSON_PREFIX, GRAPHSON_BASE_TYPE)
 
     @classmethod
@@ -23,14 +25,30 @@ class GeoShapeDeserializer(object):
         """
 
         geometryData = graphsonObj["geometry"]
+        geometryDataValue = geometryData[cls.VALUE_KEY]
 
-        if "coordinates" in geometryData and isinstance(geometryData["coordinates"], list):
-            coordinates = geometryData["coordinates"]
-            shape = geometryData["type"]
-            radius = geometryData["radius"]
-            radiusUnits = geometryData["property"]["radius_units"]
+        val = iter(geometryDataValue)
+        geometryDataValue = dict(zip(val, val))
+
+        # print(10 * "A")
+        # pprint.pprint(graphsonObj)
+        # print(10 * "A")
+        # pprint.pprint(geometryDataValue)
+        # print(10 * "A")
+        # print(type(geometryDataValue))
+        # print(10 * "A")
+        #
+        # pprint.pprint(geometryDataValue)
+        # print(10 * "A")
+
+        if "coordinates" in geometryDataValue and isinstance(geometryDataValue["coordinates"][cls.VALUE_KEY], list):
+            coordinates = geometryDataValue["coordinates"][cls.VALUE_KEY]
+            shape = geometryDataValue["type"]
+            radius = geometryDataValue["radius"][cls.VALUE_KEY]
+            radiusUnits = geometryDataValue["properties"][cls.VALUE_KEY][1]
 
             if len(coordinates) >= 2:
+
                 if shape.lower() == "circle":
                     if radiusUnits:
                         if radiusUnits.lower() == "km":
@@ -45,10 +63,14 @@ class GeoShapeDeserializer(object):
                         radius = radius
                         pass
 
-                    return cls.__deserialize_circle_from_coordinates(coordinates, radius)
+                    circle = cls.__deserialize_circle_from_coordinates(coordinates, radius)
+                    # print(circle.toString())
+                    return circle.toString()
 
                 elif shape.lower() == "point":
-                    return cls.__deserialize_points_from_coordinates(coordinates)
+                    point = cls.__deserialize_points_from_coordinates(coordinates)
+                    # print(point.toString())
+                    return point.toString()
 
                 else:
                     raise NotImplementedError("Currently implemented De-serialization \
@@ -107,9 +129,9 @@ class GeoShapeDeserializer(object):
             circle (Circle)
         """
 
-        coordList = type(list)(coordinates)
-        coordList = [type(float)(x) for x in coordList]
-        radius = type(float)(radius)
+        coordList = list(coordinates)
+        coordList = [x[cls.VALUE_KEY] for x in coordList]
+        radius = int(radius)
 
         circle = cls.__get_circle_from_coordinates(coordList, radius)
 
@@ -121,6 +143,7 @@ class GeoShapeDeserializer(object):
 
         Args:
             coordinates (list):
+            radius (int):
 
         Returns:
             cr (Circle)

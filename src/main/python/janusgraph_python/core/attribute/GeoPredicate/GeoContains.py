@@ -11,5 +11,5 @@ class GeoContains(object):
         return "geoContains"
 
     def geoContains(self, value):
-        print("I'm inside correct method signatured of geoContains")
-        return P(self.toString(), value)
+        continsP = P(self.toString(), value)
+        return continsP

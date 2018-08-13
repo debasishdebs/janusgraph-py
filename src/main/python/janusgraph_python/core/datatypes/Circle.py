@@ -2,7 +2,7 @@
 
 
 class Circle(object):
-    def __init__(self, latitude, longitude, radiusInKM):
+    def __init__(self, longitude, latitude, radiusInKM):
         """
 
         Args:
@@ -24,7 +24,7 @@ class Circle(object):
         return "CIRCLE"
 
     def toString(self):
-        return "Geoshape.circle"
+        return "CIRCLE(lat: {}, lon: {}, r: {})".format(self.getLatitude(), self.getLongitude(), self.getRadius())
 
     def getLatitude(self):
         return self.latitude

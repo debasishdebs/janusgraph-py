@@ -1,49 +1,29 @@
 #!/usr/bin/env python
 
 
-from gremlin_python.structure.graph import Graph
-from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection
+from gremlin_python.process.graph_traversal import __
 from janusgraph_python.core.attribute.TextPredicate.Text import Text
 from janusgraph_python.core.datatypes.Point import Point
 from janusgraph_python.core.datatypes.Circle import Circle
-from janusgraph_python.serializer.GraphsonReader import JanusGraphSONReader
-from janusgraph_python.serializer.GraphsonWriter import JanusGraphSONWriter
 from janusgraph_python.core.attribute.GeoPredicate.Geo import Geo
-from gremlin_python.driver.protocol import GremlinServerError
+from janusgraph_python.driver.ClientBuilder import JanusGraphClient
+
+
+import pprint
 
 
 if __name__ == '__main__':
-    URL = 'ws://10.153.22.172:8182/gremlin'
 
-    graph = Graph()
-    # t = Text()
-    graphson_reader = JanusGraphSONReader().build()
-    graphson_writer = JanusGraphSONWriter().build()
-
-    remote_connection = DriverRemoteConnection(URL, "gg",
-                                                    graphson_reader=graphson_reader, graphson_writer=graphson_writer)
-    g = graph.traversal().withRemote(remote_connection)
-    count = g.V().count().next()
-
-    count1 = g.V().has("name", Text.textContains("cerb")).count().next()
-    count2 = g.V().has("name", Text.textFuzzy("cerbrus")).count().next()
-
-    print("Counting vertices")
-    print(count)
-    print("Testing predicate 1")
-    print(count1)
-    print("Testing predicate 2")
-    print(count2)
+    g = JanusGraphClient().build(url="10.153.22.172", port="8182", graph="gg").get_traversal()
 
     # Next up would be adding a property with GeoShape data type back to JanusGraph
     # Add a new node of type monster named Stymphalian birds.
 
-    countBull = g.V().has("name", "Erymanthian Boar").count().next()
-    print(countBull)
+    countBull = g.V().has("name", "Stymphalian birds").count().next()
     if countBull >= 1:
-        bull = g.V().has("name", "Erymanthian Boar").next()
+        birds = g.V().has("name", "Stymphalian birds").next()
     else:
-        bull = g.addV("monster").property("name", "Erymanthian Boar").next()
+        birds = g.addV("monster").property("name", "Stymphalian birds").next()
 
     # Retrive hercules node, so that we can add a new edge to it.
     hercules = g.V().has("name", Text.textContainsFuzzy("herculeas")).next()
@@ -52,19 +32,43 @@ if __name__ == '__main__':
     # First let us create the GeoShape obj
 
     # We define arcadia point by its lat and long
-    erymanthos = Point(30.58, 20.50)
+    arcadia = Circle(37.35, 22.15, 5)
     # We add arcadia POINT to our newly created edge.
-    edgeAdded = g.V(bull).as_("to").V(hercules).addE("battled").property("time", 4).property("place", erymanthos).to("to").next()
+    edgeAdded = g.V(birds).as_("to").V(hercules).addE("battled").property("time", 6).property("place", arcadia).to("to").next()
+    print(15*"=")
     print(edgeAdded)
     print("Was edge added")
+    print(15 * "=")
 
+    print(15 * "=")
     print("Testing retrival of GeoShapes")
     edgesH = g.V().has("name", Text.textContainsFuzzy("herculeas")).outE("battled").valueMap("place").toList()
     print(edgesH)
+    print(15 * "=")
+
+    # print(15 * "=")
+    # print("Testing another query (herculeasBattles)")
+    # herculeasBattles = g.V().has("name", Text.textContainsPrefix("hercu")).\
+    #                         outE("battled").project("time", "place").by("time").by("place").toList()
+    # print(herculeasBattles)
+    # print(15 * "=")
+
+    print(15 * "=")
+    print("Testing edge serialization")
+    id = g.E().id().next()
+    print(id)
+    print(15 * "=")
 
     # Next I'm going to test GeoPredicates
-    # shape = Circle(37.97, 23.72, 5000)
-    point = Circle(22, 39, 50)
-    edges = g.E().has("place", Geo.geoWithin(point)).valueMap(True).toList()
+    # shape = Circle(23, 37, 1000)
+    print(15 * "=")
+    shape = Circle(23, 37, 1000)
+    edges = g.V().has("name", Text.textContainsFuzzy("herculeas")).\
+                            outE().has("place", Geo.geoWithin(shape)).toList()
+    herculesBattledWith = g.V().has("name", Text.textContainsFuzzy("herculeas")).\
+                            outE().has("place", Geo.geoWithin(shape)).inV().path().by(__.valueMap(True)).toList()
     print("Edges etrived using Geo Predicates")
-    print(edges)
+    pprint.pprint(herculesBattledWith)
+    print(15 * "=")
+    pprint.pprint(edges)
+    print(15 * "=")

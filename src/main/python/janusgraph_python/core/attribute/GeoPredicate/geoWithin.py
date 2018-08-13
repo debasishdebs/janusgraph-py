@@ -11,10 +11,7 @@ class GeoWithin(object):
         return "geoWithin"
 
     def geoWithin(self, value):
-        print("I'm inside correct method signature of geoWithin")
-        print(value)
 
         withinP = P(self.toString(), value)
-        print(withinP)
 
         return withinP
