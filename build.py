@@ -11,7 +11,7 @@ name = "janusgraph_python"
 
 tinkerpop_version = "3.3.3"
 janusgraph_version = "0.3.0"
-version = "0.0.2"
+version = "0.0.4devbeta"
 
 use_plugin("python.core")
 # the python unittest plugin allows running python's standard library unittests
