@@ -2,7 +2,7 @@
 
 
 class Point(object):
-    def __init__(self, latitude, longitude):
+    def __init__(self, longitude, latitude):
         """
 
         Args:
@@ -11,6 +11,14 @@ class Point(object):
         """
         self.latitude = latitude
         self.longitude = longitude
+
+        status = self.__are_valid_coordinates()
+
+        if status:
+            pass
+        else:
+            raise ValueError("Invalid Coordinates passed. "
+                             "Latitude needs to be b/w [-90, 90] and Longitude b/w [-180, 180]")
         pass
 
     def getShape(self):
@@ -19,6 +27,7 @@ class Point(object):
         Returns:
             str
         """
+
         return "POINT"
 
     def getLatitude(self):
@@ -29,6 +38,12 @@ class Point(object):
 
     def getCoordinates(self):
         return [self.latitude, self.longitude]
+
+    def __are_valid_coordinates(self):
+        if (-90 <= self.getLatitude() <= 90) and (-180 <= self.getLongitude() <= 180):
+            return True
+        else:
+            return False
 
     def __eq__(self, other):
         """
@@ -49,8 +64,11 @@ class Point(object):
             else:
                 return False
 
-    def __hash__(self):
-        return (self.getLatitude().__hash__()*397) ^ (self.getLongitude().__hash__())
+    def __str__(self):
+        return self.toString()
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
     def toString(self):
         point = "POINT(lat: {}, lon: {})".format(self.getLatitude(), self.getLongitude())
