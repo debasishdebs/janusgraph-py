@@ -13,6 +13,15 @@ class Circle(object):
         self.latitude = latitude
         self.longitude = longitude
         self.radius = radiusInKM
+
+        status = self.__are_valid_coordinates()
+
+        if status:
+            pass
+        else:
+            raise ValueError("Invalid Coordinates/Radius passed. "
+                             "Latitude needs to be b/w [-90, 90] and Longitude b/w [-180, 180] and Radius > 0")
+
         pass
 
     def getShape(self):
@@ -38,6 +47,12 @@ class Circle(object):
     def getRadius(self):
         return self.radius
 
+    def __are_valid_coordinates(self):
+        if (-90 <= self.getLatitude() <= 90) and (-180 <= self.getLongitude() <= 180) and (self.getRadius() > 0):
+            return True
+        else:
+            return False
+
     def __eq__(self, other):
         """
 
@@ -57,3 +72,9 @@ class Circle(object):
                 return True
             else:
                 return False
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __str__(self):
+        return self.toString()

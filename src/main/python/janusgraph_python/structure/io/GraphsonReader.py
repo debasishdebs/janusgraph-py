@@ -13,7 +13,7 @@ class JanusGraphSONReader(object):
     deserializers = dict()
 
     def __init__(self):
-        self.writer = None
+        self.reader = None
         pass
 
     def __register_default_deserializers(self):
@@ -32,8 +32,9 @@ class JanusGraphSONReader(object):
 
     def build(self):
         self.__register_default_deserializers()
-        self.writer = GraphSONReader(self.deserializers)
-        return self.writer
+        self.reader = GraphSONReader(self.deserializers)
+        # print("Reader is registered ", self.reader.deserializers.__str__())
+        return self.reader
 
     def register_deserializer(self, typeClass, serializer):
         """

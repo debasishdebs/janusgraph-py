@@ -11,7 +11,7 @@ name = "janusgraph_python"
 
 tinkerpop_version = "3.3.3"
 janusgraph_version = "0.3.0"
-version = "0.0.4devbeta"
+version = "0.0.4"
 
 use_plugin("python.core")
 # the python unittest plugin allows running python's standard library unittests
@@ -20,6 +20,7 @@ use_plugin("python.unittest")
 use_plugin("python.install_dependencies")
 # a plugin that measures unit test statement coverage
 use_plugin("python.coverage")
+# use_plugin('pypi:pybuilder_pytest_coverage')
 # for packaging purposes since we'll build a tarball
 use_plugin("python.distutils")
 
@@ -30,6 +31,14 @@ default_task = ['clean', 'install_dependencies', 'publish']
 def initialize(project):
     # Nothing happens here yet, but notice the `project` argument which is automatically injected.
     project.set_property("coverage_break_build", False)  # default is True
+    project.set_property("coverage_reset_modules", True)
+
+    # project.set_property_if_unset("pytest_coverage_html", True)
+    # project.set_property_if_unset("pytest_coverage_skip_covered", True)
+
+    project.set_property("unittest_test_method_prefix", "test")
+    project.set_property("unittest_file_suffix", "_test")
+
     project.set_property("dir_dist", "target/dist/" + project.name)
     project.depends_on("gremlinpython", "=={}".format(tinkerpop_version))
     pass

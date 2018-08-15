@@ -19,11 +19,11 @@ if __name__ == '__main__':
     # Next up would be adding a property with GeoShape data type back to JanusGraph
     # Add a new node of type monster named Stymphalian birds.
 
-    countBull = g.V().has("name", "Stymphalian birds").count().next()
+    countBull = g.V().has("name", "Debasish Kanhar").count().next()
     if countBull >= 1:
-        birds = g.V().has("name", "Stymphalian birds").next()
+        birds = g.V().has("name", "Debasish Kanhar").next()
     else:
-        birds = g.addV("monster").property("name", "Stymphalian birds").next()
+        birds = g.addV("monster").property("name", "Debasish Kanhar").next()
 
     # Retrive hercules node, so that we can add a new edge to it.
     hercules = g.V().has("name", Text.textContainsFuzzy("herculeas")).next()
@@ -32,20 +32,28 @@ if __name__ == '__main__':
     # First let us create the GeoShape obj
 
     # We define arcadia point by its lat and long
-    arcadia = Circle(37.35, 22.15, 5)
+    arcadia = Point(21.50, 37.58)
     # We add arcadia POINT to our newly created edge.
-    edgeAdded = g.V(birds).as_("to").V(hercules).addE("battled").property("time", 6).property("place", arcadia).to("to").next()
-    print(15*"=")
-    print(edgeAdded)
-    print("Was edge added")
-    print(15 * "=")
+    edgeAdded = g.V(birds).as_("to").V(hercules).addE("battled").property("time", 90).property("place", arcadia).to("to").next()
 
     print(15 * "=")
-    print("Testing retrival of GeoShapes")
-    edgesH = g.V().has("name", Text.textContainsFuzzy("herculeas")).outE("battled").valueMap("place").toList()
+    print("Testing retrival of Point shape")
+    edgesH = g.V(birds).inE("battled").valueMap("place").next()
     print(edgesH)
     print(15 * "=")
 
+    if g.V().has("name", "Rocky").count().next() > 0:
+        v2 = g.V().has("name", "Rocky").next()
+    else:
+        v2 = g.addV("monster").property("name", "Rocky").next()
+    athens = Circle(23.46, 37.59, 10)
+    g.V(v2).as_("to").V(hercules).addE("battled").property("time", 91).property("place", athens).to("to").next()
+
+    print(15 * "=")
+    print("Testing retrival of Circle shape")
+    edgesH = g.V(v2).inE("battled").valueMap("place").next()
+    print(edgesH)
+    print(15 * "=")
     # print(15 * "=")
     # print("Testing another query (herculeasBattles)")
     # herculeasBattles = g.V().has("name", Text.textContainsPrefix("hercu")).\
@@ -64,9 +72,9 @@ if __name__ == '__main__':
     print(15 * "=")
     shape = Circle(23, 37, 1000)
     edges = g.V().has("name", Text.textContainsFuzzy("herculeas")).\
-                            outE().has("place", Geo.geoWithin(shape)).toList()
+                            outE().has("place", Geo.geoWithin(shape)).next()
     herculesBattledWith = g.V().has("name", Text.textContainsFuzzy("herculeas")).\
-                            outE().has("place", Geo.geoWithin(shape)).inV().path().by(__.valueMap(True)).toList()
+                            outE().has("place", Geo.geoWithin(shape)).inV().path().by(__.valueMap(True)).next()
     print("Edges etrived using Geo Predicates")
     pprint.pprint(herculesBattledWith)
     print(15 * "=")
