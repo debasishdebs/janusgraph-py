@@ -33,7 +33,6 @@ class JanusGraphSONReader(object):
     def build(self):
         self.__register_default_deserializers()
         self.reader = GraphSONReader(self.deserializers)
-        # print("Reader is registered ", self.reader.deserializers.__str__())
         return self.reader
 
     def register_deserializer(self, typeClass, serializer):
