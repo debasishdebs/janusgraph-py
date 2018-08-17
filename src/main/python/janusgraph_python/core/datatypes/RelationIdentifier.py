@@ -29,6 +29,11 @@ class RelationIdentifier(object):
     def __str__(self):
         return self.toString()
 
+    def toDict(self):
+        edgeID = dict()
+        edgeID["janusgraph:RelationIdentifier"] = self.toString()
+        return edgeID
+
     def toString(self):
         return str(self.relationID)
 
