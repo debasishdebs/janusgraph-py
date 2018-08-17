@@ -3,8 +3,10 @@
 from gremlin_python.structure.io.graphsonV3d0 import GraphSONWriter
 from janusgraph_python.serializer.PointSerializer import PointSerializer
 from janusgraph_python.serializer.CircleSerializer import CircleSerializer
+from janusgraph_python.serializer.RelationIdentifierSerializer import RelationIdentifierSerializer
 from janusgraph_python.core.datatypes.Point import Point
 from janusgraph_python.core.datatypes.Circle import Circle
+from janusgraph_python.core.datatypes.RelationIdentifier import RelationIdentifier
 
 
 class JanusGraphSONWriter(object):
@@ -24,7 +26,8 @@ class JanusGraphSONWriter(object):
 
         janusSerializers = {
             Circle: CircleSerializer,
-            Point: PointSerializer
+            Point: PointSerializer,
+            RelationIdentifier: RelationIdentifierSerializer
         }
 
         return janusSerializers

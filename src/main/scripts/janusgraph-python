@@ -15,6 +15,7 @@ import pprint
 if __name__ == '__main__':
 
     g = JanusGraphClient().build(url="10.153.22.172", port="8182", graph="gg").get_traversal()
+    # g = JanusGraphClient().build(url="0.0.0.0", port="8182", graph="gods_traversal").get_traversal()
 
     # Next up would be adding a property with GeoShape data type back to JanusGraph
     # Add a new node of type monster named Stymphalian birds.
@@ -26,34 +27,36 @@ if __name__ == '__main__':
         birds = g.addV("monster").property("name", "Debasish Kanhar").next()
 
     # Retrive hercules node, so that we can add a new edge to it.
-    hercules = g.V().has("name", Text.textContainsFuzzy("herculeas")).next()
+    # hercules = g.V().has("name", Text.textContainsFuzzy("herculeas")).next()
+
     # Now we add edge b/w the vertices created and retrieved.
     # Since we are going to add a GeoShape point specifying where the battle happened,
     # First let us create the GeoShape obj
 
     # We define arcadia point by its lat and long
-    arcadia = Point(21.50, 37.58)
+    # arcadia = Point(21.50, 37.58)
     # We add arcadia POINT to our newly created edge.
-    edgeAdded = g.V(birds).as_("to").V(hercules).addE("battled").property("time", 90).property("place", arcadia).to("to").next()
+    # edgeAdded = g.V(birds).as_("to").V(hercules).addE("battled").property("time", 90).property("place", arcadia).to("to").next()
+    #
+    # print(15 * "=")
+    # print("Testing retrival of Point shape")
+    # edgesH = g.V(birds).inE("battled").valueMap("place").next()
+    # print(edgesH)
+    # print(15 * "=")
+    #
+    # if g.V().has("name", "Rocky").count().next() > 0:
+    #     v2 = g.V().has("name", "Rocky").next()
+    # else:
+    #     v2 = g.addV("monster").property("name", "Rocky").next()
+    # athens = Circle(23.46, 37.59, 10)
+    # g.V(v2).as_("to").V(hercules).addE("battled").property("time", 91).property("place", athens).to("to").next()
+    #
+    # print(15 * "=")
+    # print("Testing retrival of Circle shape")
+    # edgesH = g.V(v2).inE("battled").valueMap("place").next()
+    # print(edgesH)
+    # print(15 * "=")
 
-    print(15 * "=")
-    print("Testing retrival of Point shape")
-    edgesH = g.V(birds).inE("battled").valueMap("place").next()
-    print(edgesH)
-    print(15 * "=")
-
-    if g.V().has("name", "Rocky").count().next() > 0:
-        v2 = g.V().has("name", "Rocky").next()
-    else:
-        v2 = g.addV("monster").property("name", "Rocky").next()
-    athens = Circle(23.46, 37.59, 10)
-    g.V(v2).as_("to").V(hercules).addE("battled").property("time", 91).property("place", athens).to("to").next()
-
-    print(15 * "=")
-    print("Testing retrival of Circle shape")
-    edgesH = g.V(v2).inE("battled").valueMap("place").next()
-    print(edgesH)
-    print(15 * "=")
     # print(15 * "=")
     # print("Testing another query (herculeasBattles)")
     # herculeasBattles = g.V().has("name", Text.textContainsPrefix("hercu")).\
@@ -63,7 +66,7 @@ if __name__ == '__main__':
 
     print(15 * "=")
     print("Testing edge serialization")
-    id = g.E().id().next()
+    id = g.E(g.E().id().next()).id().next()
     print(id)
     print(15 * "=")
 

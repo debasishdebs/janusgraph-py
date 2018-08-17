@@ -8,7 +8,6 @@ from janusgraph_python.utils.toGeoJSON import toGeoJSON
 class PointSerializer(object):
     GRAPHSON_PREFIX = "janusgraph"
     GRAPHSON_BASE_TYPE = "Geoshape"
-    GRAPHSON_TYPE = GraphSONUtil.formatType(GRAPHSON_PREFIX, GRAPHSON_BASE_TYPE)
 
     @classmethod
     def dictify(cls, point, writer):

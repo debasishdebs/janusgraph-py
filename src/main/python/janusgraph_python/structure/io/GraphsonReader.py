@@ -3,12 +3,15 @@
 from gremlin_python.structure.io.graphsonV3d0 import GraphSONReader
 from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
 from janusgraph_python.serializer.GeoShapeDeserializer import GeoShapeDeserializer
+from janusgraph_python.serializer.RelationIdentifierDeserializer import RelationIdentifierDeserializer
 
 
 class JanusGraphSONReader(object):
     GRAPHSON_PREFIX = "janusgraph"
-    GRAPHSON_BASE_TYPE = "Geoshape"
-    GeoShape_GRAPHSON_TYPE = GraphSONUtil.formatType(GRAPHSON_PREFIX, GRAPHSON_BASE_TYPE)
+    GEO_GRAPHSON_BASE_TYPE = "Geoshape"
+    RELATIONID_BASE_TYPE = "RelationIdentifier"
+    GeoShape_GRAPHSON_TYPE = GraphSONUtil.formatType(GRAPHSON_PREFIX, GEO_GRAPHSON_BASE_TYPE)
+    RelationID_GRAPHSON_TYPE = GraphSONUtil.formatType(GRAPHSON_PREFIX, RELATIONID_BASE_TYPE)
 
     deserializers = dict()
 
@@ -25,7 +28,8 @@ class JanusGraphSONReader(object):
         # Currently the default de-serializers registered.
 
         janusDeSerializers = {
-            self.GeoShape_GRAPHSON_TYPE: GeoShapeDeserializer
+            self.GeoShape_GRAPHSON_TYPE: GeoShapeDeserializer,
+            self.RelationID_GRAPHSON_TYPE: RelationIdentifierDeserializer
         }
 
         return janusDeSerializers

@@ -1,15 +1,13 @@
 # Name: Debasish Kanhar
 
-from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
 from janusgraph_python.core.datatypes.Point import Point
 from janusgraph_python.core.datatypes.Circle import Circle
 
 
 class GeoShapeDeserializer(object):
-    GRAPHSON_PREFIX = "janusgraph"
-    GRAPHSON_BASE_TYPE = "Geoshape"
+    # GRAPHSON_PREFIX = "janusgraph"
+    # GRAPHSON_BASE_TYPE = "Geoshape"
     VALUE_KEY = "@value"
-    GRAPHSON_TYPE = GraphSONUtil.formatType(GRAPHSON_PREFIX, GRAPHSON_BASE_TYPE)
 
     @classmethod
     def objectify(cls, graphsonObj, reader):
