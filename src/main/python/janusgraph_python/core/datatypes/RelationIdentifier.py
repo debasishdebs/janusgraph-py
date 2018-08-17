@@ -18,7 +18,7 @@ class RelationIdentifier(object):
         if other is None:
             return False
         else:
-            if self.relationID.equals(other.relationID):
+            if self.relationID == other.relationID:
                 return True
             else:
                 return False
