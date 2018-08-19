@@ -1,7 +1,8 @@
 # Name: Debasish Kanhar
 
-from janusgraph_python.structure.io.GraphsonReader import JanusGraphSONReader
-from janusgraph_python.structure.io.GraphsonWriter import JanusGraphSONWriter
+from ..structure.io.GraphsonReader import JanusGraphSONReader
+from ..structure.io.GraphsonWriter import JanusGraphSONWriter
+
 from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection
 from gremlin_python.structure.graph import Graph
 

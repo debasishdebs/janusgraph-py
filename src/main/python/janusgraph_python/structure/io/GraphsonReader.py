@@ -2,8 +2,9 @@
 
 from gremlin_python.structure.io.graphsonV3d0 import GraphSONReader
 from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
-from janusgraph_python.serializer.GeoShapeDeserializer import GeoShapeDeserializer
-from janusgraph_python.serializer.RelationIdentifierDeserializer import RelationIdentifierDeserializer
+
+from ...serializer.RelationIdentifierDeserializer import RelationIdentifierDeserializer
+from ...serializer.GeoShapeDeserializer import GeoShapeDeserializer
 
 
 class JanusGraphSONReader(object):

@@ -12,8 +12,24 @@ class Geo(object):
 
     @staticmethod
     def geoContains(value):
+        """
+
+        Args:
+            value :
+
+        Returns:
+
+        """
         return Geo.contains.geoContains(value)
 
     @staticmethod
     def geoWithin(value):
+        """
+
+        Args:
+            value:
+
+        Returns:
+
+        """
         return Geo.within.geoWithin(value)

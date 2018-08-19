@@ -1,7 +1,7 @@
 # Name: Debasish Kanhar
 
 from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
-from janusgraph_python.core.datatypes.RelationIdentifier import RelationIdentifier
+from ..core.datatypes.RelationIdentifier import RelationIdentifier
 
 
 class RelationIdentifierSerializer(object):
