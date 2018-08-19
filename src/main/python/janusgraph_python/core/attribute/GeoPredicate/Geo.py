@@ -26,15 +26,17 @@ from .GeoWithin import GeoWithin
 
 
 class Geo(object):
-    def __init__(self):
-        pass
+    """
+    This class defines all the Geo Predicates.
+    """
+
     contains = GeoContains()
     within = GeoWithin()
 
     @staticmethod
     def geoContains(value):
         """
-
+            The class is used for JanusGraph geoContains predicate.
         Args:
             value :
 
@@ -46,7 +48,7 @@ class Geo(object):
     @staticmethod
     def geoWithin(value):
         """
-
+            The class is used for JanusGraph geoContains predicate.
         Args:
             value:
 
