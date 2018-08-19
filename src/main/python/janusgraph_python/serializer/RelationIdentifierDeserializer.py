@@ -1,6 +1,6 @@
 # Name: Debasish Kanhar
 
-from janusgraph_python.core.datatypes.RelationIdentifier import RelationIdentifier
+from ..core.datatypes.RelationIdentifier import RelationIdentifier
 
 
 class RelationIdentifierDeserializer(object):

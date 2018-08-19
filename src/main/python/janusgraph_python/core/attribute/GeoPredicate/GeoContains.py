@@ -8,8 +8,21 @@ class GeoContains(object):
         pass
 
     def toString(self):
+        """
+
+        Returns:
+
+        """
         return "geoContains"
 
     def geoContains(self, value):
+        """
+
+        Args:
+            value:
+
+        Returns:
+
+        """
         continsP = P(self.toString(), value)
         return continsP

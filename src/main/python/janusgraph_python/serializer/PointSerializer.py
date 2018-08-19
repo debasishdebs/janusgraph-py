@@ -1,8 +1,8 @@
 # Name: Debasish Kanhar
 
 from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
-from janusgraph_python.core.datatypes.Point import Point
-from janusgraph_python.utils.toGeoJSON import toGeoJSON
+from ..core.datatypes.GeoShape import Point
+from ..utils.toGeoJSON import toGeoJSON
 
 
 class PointSerializer(object):

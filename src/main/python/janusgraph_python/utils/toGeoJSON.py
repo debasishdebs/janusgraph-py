@@ -39,8 +39,6 @@ class toGeoJSON(object):
             self.geoJSON["coordinates"] = coordinateJSON
 
         else:
-            # self.geoJSON["geometry"] = dict()
-
             geometryData = dict()
 
             geometryData["type"] = self.GEOMETRY_TYPE

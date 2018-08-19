@@ -23,8 +23,10 @@ use_plugin("python.coverage")
 # use_plugin('pypi:pybuilder_pytest_coverage')
 # for packaging purposes since we'll build a tarball
 use_plugin("python.distutils")
+# For generating Pycharm project files
+use_plugin('python.pycharm')
 
-default_task = ['clean', 'install_dependencies', 'publish']
+default_task = ['clean', 'install_dependencies', 'publish', 'pycharm_generate']
 
 # This is an initializer, a block of logic that runs before the project is built.
 @init
@@ -32,9 +34,13 @@ def initialize(project):
     # Nothing happens here yet, but notice the `project` argument which is automatically injected.
     project.set_property("coverage_break_build", False)  # default is True
     project.set_property("coverage_reset_modules", True)
-
-    # project.set_property_if_unset("pytest_coverage_html", True)
-    # project.set_property_if_unset("pytest_coverage_skip_covered", True)
+    project.set_property("coverage_threshold_warn", 50)
+    project.set_property("coverage_branch_threshold_warn", 60)
+    project.set_property("coverage_branch_partial_threshold_warn", 70)
+    project.set_property("coverage_allow_non_imported_modules", True)
+    project.set_property("coverage_exceptions", ["__init__",
+                         "janusgraph_python.core.attribute", "janusgraph_python.core.attribute.GeoPredicate.Geo",
+                         "janusgraph_python.core.attribute.TextPredicate.Text", "janusgraph_python.driver.ClientBuilder"])
 
     project.set_property("unittest_test_method_prefix", "test")
     project.set_property("unittest_file_suffix", "_test")

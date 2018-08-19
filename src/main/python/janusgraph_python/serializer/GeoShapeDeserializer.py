@@ -1,12 +1,9 @@
 # Name: Debasish Kanhar
 
-from janusgraph_python.core.datatypes.Point import Point
-from janusgraph_python.core.datatypes.Circle import Circle
+from ..core.datatypes.GeoShape import Point, Circle
 
 
 class GeoShapeDeserializer(object):
-    # GRAPHSON_PREFIX = "janusgraph"
-    # GRAPHSON_BASE_TYPE = "Geoshape"
     VALUE_KEY = "@value"
 
     @classmethod
