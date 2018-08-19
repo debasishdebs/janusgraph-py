@@ -35,7 +35,7 @@ class JanusGraphClient(object):
         self.graphsonVersion = version
         pass
 
-    def build(self, url="loclahost", port="8182", graph="g"):
+    def connect(self, url="loclahost", port="8182", graph="g"):
 
         URL = "ws://{}:{}/gremlin".format(url, port)
 
@@ -47,7 +47,10 @@ class JanusGraphClient(object):
 
         return self
 
-    def get_traversal(self):
-        graph = Graph()
-        g = graph.traversal().withRemote(self.REMOTE_CONNECTION)
-        return g
+    def get_connection(self):
+        """
+
+        Returns:
+            DriverRemoteConnection
+        """
+        return self.REMOTE_CONNECTION

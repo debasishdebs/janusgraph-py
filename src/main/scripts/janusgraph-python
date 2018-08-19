@@ -5,17 +5,16 @@ from gremlin_python.process.graph_traversal import __
 from janusgraph_python.core.attribute.TextPredicate.Text import Text
 from janusgraph_python.core.datatypes.GeoShape import Point, Circle
 from janusgraph_python.core.attribute.GeoPredicate.Geo import Geo
+
 from janusgraph_python.driver.ClientBuilder import JanusGraphClient
-
-
+from gremlin_python.structure.graph import Graph
 import pprint
 
 
 if __name__ == '__main__':
 
-    g = JanusGraphClient().build(url="10.153.22.172", port="8182", graph="gg").get_traversal()
-    # g = JanusGraphClient().build(url="0.0.0.0", port="8182", graph="gods_traversal").get_traversal()
-
+    connection = JanusGraphClient().connect(url="10.153.22.172", port="8182", graph="gg").get_connection()
+    g = Graph().traversal().withRemote(connection)
     # Next up would be adding a property with GeoShape data type back to JanusGraph
     # Add a new node of type monster named Stymphalian birds.
 
