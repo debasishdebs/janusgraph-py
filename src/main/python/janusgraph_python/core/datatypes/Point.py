@@ -24,10 +24,10 @@ __email__ = ["d.kanhar@gmail.com", "dekanhar@in.ibm.com"]
 class Point(object):
     def __init__(self, longitude, latitude):
         """
-
+            The actual class representing Geographical Point/Geometrical Point.
         Args:
-            latitude (float):
-            longitude (float):
+            latitude (float): The latitude of Point
+            longitude (float): The longitude of Point
         """
         self.latitude = latitude
         self.longitude = longitude
@@ -43,7 +43,7 @@ class Point(object):
 
     def getShape(self):
         """
-
+            Returns the shape of Geometrical object
         Returns:
             str
         """
@@ -51,15 +51,35 @@ class Point(object):
         return "POINT"
 
     def getLatitude(self):
+        """
+            Get the latitude of Point
+        Returns:
+            float
+        """
         return self.latitude
 
     def getLongitude(self):
+        """
+            Get the longitude of Point
+        Returns:
+            float
+        """
         return self.longitude
 
     def getCoordinates(self):
+        """
+            Get the coordinates of Point
+        Returns:
+            list
+        """
         return [self.latitude, self.longitude]
 
     def __are_valid_coordinates(self):
+        """
+            Test for validity for Coordinates being passed.
+        Returns:
+            bool
+        """
         if (-90 <= self.getLatitude() <= 90) and (-180 <= self.getLongitude() <= 180):
             return True
         else:
@@ -67,17 +87,23 @@ class Point(object):
 
     def __eq__(self, other):
         """
-
+            Overrides the defauls class equality method.
+            This checks if 2 Geometrical Point classes/objects are equal or not.
         Args:
             other (Point):
 
         Returns:
-
+            bool
         """
 
         if other is None:
             return False
         else:
+            if other.getShape() == self.getShape():
+                pass
+            else:
+                return False
+
             if (other.getLatitude()).__eq__(self.getLatitude()) and \
                     (other.getLongitude()).__eq__(self.getLongitude()):
                 return True
@@ -91,5 +117,10 @@ class Point(object):
         return not self.__eq__(other)
 
     def toString(self):
+        """
+            Returns the String representation of Geometrical Point
+        Returns:
+            str
+        """
         point = "POINT(lat: {}, lon: {})".format(self.getLatitude(), self.getLongitude())
         return point

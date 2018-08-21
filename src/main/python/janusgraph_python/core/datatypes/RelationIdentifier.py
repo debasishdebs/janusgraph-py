@@ -23,12 +23,17 @@ __email__ = ["d.kanhar@gmail.com", "dekanhar@in.ibm.com"]
 
 class RelationIdentifier(object):
     def __init__(self, relationID):
+        """
+            This class represents the RelationIdentifier object type which represents Edge IDs in JanusGraph.
+        Args:
+            relationID (str): The string representation, "-" separated of Edge IDs.
+        """
         self.relationID = relationID
         pass
 
     def __eq__(self, other):
         """
-
+            Overrides default equality method.
         Args:
             other (RelationIdentifier):
 
@@ -50,12 +55,28 @@ class RelationIdentifier(object):
         return self.toString()
 
     def toDict(self):
+        """
+            Dictify the relationID, with properr JanusGraph Identifier token.
+        Returns:
+
+        """
         edgeID = dict()
         edgeID["janusgraph:RelationIdentifier"] = self.toString()
         return edgeID
 
     def toString(self):
+        """
+            Returns string representation of RelationIdentifier.
+        Returns:
+            str
+        """
         return str(self.relationID)
 
     def getID(self):
+        """
+            Get the underlaying ID of class.
+
+        Returns:
+            str
+        """
         return self.toString()

@@ -25,8 +25,14 @@ from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
 from ..core.datatypes.GeoShape import Point
 from ..utils.toGeoJSON import toGeoJSON
 
+import json
+
 
 class PointSerializer(object):
+    """
+    Serialize a GeoShape Point object so that the same can be passed to Gremlin Server
+    """
+
     GRAPHSON_PREFIX = "janusgraph"
     GRAPHSON_BASE_TYPE = "Geoshape"
 
@@ -36,11 +42,11 @@ class PointSerializer(object):
         This is serializer method for Point class.
 
         Args:
-            point (Point):
+            point (Point): The GeoShape Point class to serialize into.
             writer:
 
         Returns:
-
+            json
         """
 
         geometryJSON = toGeoJSON(point).convert()

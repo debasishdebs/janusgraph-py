@@ -25,17 +25,37 @@ from ..structure.io.GraphsonReader import JanusGraphSONReader
 from ..structure.io.GraphsonWriter import JanusGraphSONWriter
 
 from gremlin_python.driver.driver_remote_connection import DriverRemoteConnection
-from gremlin_python.structure.graph import Graph
 
 
 class JanusGraphClient(object):
+    """
+        JanusGraph Client Builder which adds the Serializers for JanusGraph specific objects, predicates etc.
+    """
+
     REMOTE_CONNECTION = None
 
     def __init__(self, version=3.0):
+        """
+            Initializing with GraphSON version 3.0
+        Args:
+            version (int):
+        """
+
         self.graphsonVersion = version
         pass
 
     def connect(self, url="loclahost", port="8182", graph="g"):
+        """
+            Connect to JanusGraph's gremlin-server instance. Takes URL, Port and Graph
+
+        Args:
+            url (str): The URL of JanusGraph gremlin-server instance. Default to localhost
+            port (str): The PORT of JanusGraph gremlin-server instance. Default to 8182.
+            graph (str): The GraphTraversalSource being exposed from gremlin-server instance. Defaults to g
+
+        Returns:
+            JanusGraphClient
+        """
 
         URL = "ws://{}:{}/gremlin".format(url, port)
 
@@ -49,8 +69,9 @@ class JanusGraphClient(object):
 
     def get_connection(self):
         """
-
+            Get the RemoteConnection object, so that same can be used to create GraphTraversalSource.
         Returns:
             DriverRemoteConnection
         """
+
         return self.REMOTE_CONNECTION

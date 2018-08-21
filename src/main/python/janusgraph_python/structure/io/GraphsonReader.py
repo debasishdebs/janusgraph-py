@@ -29,6 +29,11 @@ from ...serializer.GeoShapeDeserializer import GeoShapeDeserializer
 
 
 class JanusGraphSONReader(object):
+    """
+    This class registers JanusGraph specific de-serializers so that objects like GeoShape, RelationIdentifier
+    can be interpreted on Python client side.
+    """
+
     GRAPHSON_PREFIX = "janusgraph"
     GEO_GRAPHSON_BASE_TYPE = "Geoshape"
     RELATIONID_BASE_TYPE = "RelationIdentifier"
@@ -42,11 +47,23 @@ class JanusGraphSONReader(object):
         pass
 
     def __register_default_deserializers(self):
+        """
+            This method is used to register the Default de-serializers for JanusGraph's python client.
+            Currently the deserializer registers GeoShape and RelationIdentifier classes.
+
+        Returns:
+
+        """
         janusDeSerializers = self.__build_deserializers()
 
         self.deserializers.update(janusDeSerializers)
 
     def __build_deserializers(self):
+        """
+            The actual method which takes care of adding JanusGraph specific de-serializers.
+        Returns:
+            dict
+        """
         # Currently the default de-serializers registered.
 
         janusDeSerializers = {
@@ -57,16 +74,23 @@ class JanusGraphSONReader(object):
         return janusDeSerializers
 
     def build(self):
+        """
+            The method registers JanusGraph specific de-serializers into Gremlin GraphSON Reader class.
+
+        Returns:
+            GraphSONReader
+        """
         self.__register_default_deserializers()
         self.reader = GraphSONReader(self.deserializers)
         return self.reader
 
     def register_deserializer(self, typeClass, serializer):
         """
+            This method is used to registering any additional JanusGraph de-serializers.
 
         Args:
-            typeClass (type):
-            serializer:
+            typeClass (type): The identifier to be used with underlaying graph to register the De-serializer against.
+            serializer: The De-serializer class.
 
         Returns:
 

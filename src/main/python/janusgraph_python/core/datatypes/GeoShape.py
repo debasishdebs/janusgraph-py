@@ -23,3 +23,43 @@ __email__ = ["d.kanhar@gmail.com", "dekanhar@in.ibm.com"]
 
 from .Point import Point
 from .Circle import Circle
+
+
+class GeoShape(object):
+    """
+    This class is the super class for all GeoShapes.
+    """
+
+    @staticmethod
+    def Point(longitude, latitude):
+        """
+        This is wrapper method to call the actual Geographical Point class.
+
+        Args:
+            longitude (float): The longitude of Point
+            latitude (float): The latitude of Point
+
+        Returns:
+            Point
+        """
+
+        point = Point(longitude, latitude)
+
+        return point
+
+    @staticmethod
+    def Circle(longitude, latitude, radiusInKM):
+        """
+            This is wrapper method to call the actual Geographical Circle class.
+        Args:
+            longitude (float): The longitude of Circle center
+            latitude (float): The latitude of Circle center
+            radiusInKM (int): The radius, in Kilometers of Circle
+
+        Returns:
+            Circle
+        """
+
+        circle = Circle(longitude, latitude, radiusInKM)
+
+        return circle

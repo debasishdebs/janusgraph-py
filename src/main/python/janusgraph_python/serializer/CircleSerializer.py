@@ -25,8 +25,14 @@ from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
 from ..core.datatypes.GeoShape import Circle
 from ..utils.toGeoJSON import toGeoJSON
 
+import json
+
 
 class CircleSerializer(object):
+    """
+    Serialize a GeoShape Circle object so that the same can be passed to Gremlin Server
+    """
+
     GRAPHSON_PREFIX = "janusgraph"
     GRAPHSON_BASE_TYPE = "Geoshape"
     GRAPHSON_TYPE = GraphSONUtil.formatType(GRAPHSON_PREFIX, GRAPHSON_BASE_TYPE)
@@ -37,11 +43,11 @@ class CircleSerializer(object):
         This is serializer method for Circle class.
 
         Args:
-            circle (Circle):
-            writer:
+            circle (Circle): The GeoShape Circle object to serialize
+            writer : The Gremlin GraphSON writer object to used during serializing.
 
         Returns:
-
+            json
         """
 
         geometryJSON = toGeoJSON(circle).convert()

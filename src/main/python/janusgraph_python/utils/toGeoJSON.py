@@ -22,15 +22,20 @@ __email__ = ["d.kanhar@gmail.com", "dekanhar@in.ibm.com"]
 
 
 class toGeoJSON(object):
+    """
+        Convert a GeoShape into Geo JSON so that JanusGraph can read it.
+    """
+
     TYPE_KEY = "@type"
     VALUE_KEY = "@value"
     DATA_TYPE = "g:Double"
 
     def __init__(self, geoshape):
         """
+            Initialize the GeoShape converter. Currently implements conversion only for Point and Circle class.
 
         Args:
-            geoshape:
+            geoshape: The GeoShape object to convert.
         """
 
         self.shape = geoshape
@@ -44,9 +49,9 @@ class toGeoJSON(object):
 
     def convert(self):
         """
-
+            Convert into Geo JSON
         Returns:
-            geoJSON (dict)
+            dict
         """
 
         if self.GEOMETRY_TYPE.lower() == "point":

@@ -24,12 +24,14 @@ __email__ = ["d.kanhar@gmail.com", "dekanhar@in.ibm.com"]
 class Circle(object):
     def __init__(self, longitude, latitude, radiusInKM):
         """
+            The actual class representing Geographical Circle.
 
         Args:
-            latitude (float):
-            longitude (float):
-            radiusInKM (int):
+            latitude (float): The latitude of circle's center.
+            longitude (float): The longitude of circle's center
+            radiusInKM (int): The radius of circle in KM.
         """
+
         self.latitude = latitude
         self.longitude = longitude
         self.radius = radiusInKM
@@ -46,28 +48,58 @@ class Circle(object):
 
     def getShape(self):
         """
-
+            Return the Shape of Geometrical shape
         Returns:
             str
         """
         return "CIRCLE"
 
     def toString(self):
+        """
+            Returns the String representation of Circle object.
+        Returns:
+            str
+        """
         return "CIRCLE(lat: {}, lon: {}, r: {})".format(self.getLatitude(), self.getLongitude(), self.getRadius())
 
     def getLatitude(self):
+        """
+            Get latitude of Circle center.
+        Returns:
+            float
+        """
         return self.latitude
 
     def getLongitude(self):
+        """
+            Get longitude of circle center.
+        Returns:
+            float
+        """
         return self.longitude
 
     def getCoordinates(self):
+        """
+            Get the coordinated of circle center
+        Returns:
+            list
+        """
         return [self.latitude, self.longitude]
 
     def getRadius(self):
+        """
+            Get the radius of circle
+        Returns:
+            int
+        """
         return self.radius
 
     def __are_valid_coordinates(self):
+        """
+            Check for validity of coordinated passed to object in creation time.
+        Returns:
+            bool
+        """
         if (-90 <= self.getLatitude() <= 90) and (-180 <= self.getLongitude() <= 180) and (self.getRadius() > 0):
             return True
         else:
@@ -75,17 +107,22 @@ class Circle(object):
 
     def __eq__(self, other):
         """
-
+            Overrides default class equality method.
         Args:
-            other (Circle):
+            other (Circle): The other object to compare against.
 
         Returns:
-
+            bool
         """
 
         if other is None:
             return False
         else:
+            if other.getShape() == self.getShape():
+                pass
+            else:
+                return False
+
             if (other.getLatitude()).__eq__(self.getLatitude()) and \
                     (other.getLongitude()).__eq__(self.getLongitude()) and \
                     (other.getRadius()).__eq__(self.getRadius()):

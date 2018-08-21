@@ -68,6 +68,8 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+docs/*.rst
+docs/_static/
 
 # PyBuilder
 target/
@@ -105,3 +107,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+

@@ -3,8 +3,8 @@
 
 from gremlin_python.process.graph_traversal import __
 from janusgraph_python.core.attribute.TextPredicate.Text import Text
-from janusgraph_python.core.datatypes.GeoShape import Point, Circle
-from janusgraph_python.core.attribute.GeoPredicate.Geo import Geo
+from janusgraph_python.core.datatypes.GeoShape import GeoShape
+from janusgraph_python.core.attribute import Geo
 
 from janusgraph_python.driver.ClientBuilder import JanusGraphClient
 from gremlin_python.structure.graph import Graph
@@ -71,7 +71,7 @@ if __name__ == '__main__':
     # Next I'm going to test GeoPredicates
     # shape = Circle(23, 37, 1000)
     print(15 * "=")
-    shape = Circle(23, 37, 1000)
+    shape = GeoShape.Circle(23, 37, 1000)
     edges = g.V().has("name", Text.textContainsFuzzy("herculeas")).\
                             outE().has("place", Geo.geoWithin(shape)).next()
     herculesBattledWith = g.V().has("name", Text.textContainsFuzzy("herculeas")).\
