@@ -22,6 +22,7 @@ __email__ = ["d.kanhar@gmail.com", "dekanhar@in.ibm.com"]
 
 
 from gremlin_python.process.traversal import P
+from janusgraph_python.core.datatypes.GeoShape import GeoShape
 
 
 class GeoContains(object):
@@ -30,20 +31,24 @@ class GeoContains(object):
 
     def toString(self):
         """
-
+            Returns the string representation of GeoContains Predicate
         Returns:
-
+            str
         """
+
         return "geoContains"
 
     def geoContains(self, value):
         """
+            Calls the Gremlin Python's P serializer to query based on geoContains predicate.
 
         Args:
-            value:
+            value (GeoShape):
 
         Returns:
-
+            P
         """
+
         continsP = P(self.toString(), value)
+
         return continsP

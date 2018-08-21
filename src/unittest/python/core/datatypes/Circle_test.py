@@ -2,7 +2,7 @@
 
 import unittest
 
-from janusgraph_python.core.datatypes.Circle import Circle
+from janusgraph_python.core.datatypes.GeoShape import GeoShape
 
 
 class TestCircle(unittest.TestCase):
@@ -12,7 +12,7 @@ class TestCircle(unittest.TestCase):
         self.longitude = 171.2
         self.radius = 5
 
-        self.circle = Circle(self.longitude, self.latitude, self.radius)
+        self.circle = GeoShape.Circle(self.longitude, self.latitude, self.radius)
 
         pass
 
@@ -25,11 +25,11 @@ class TestCircle(unittest.TestCase):
         radius = 0
 
         with self.assertRaises(ValueError):
-            Circle(longitude, latitude, radius)
+            GeoShape.Circle(longitude, latitude, radius)
         pass
 
     """
-    This method is used to unit test when Valid coordinates are passed to Circle class. 
+    This method is used to unit test when Valid coordinates are passed to Circle class.
     """
     def test_valid_circle(self):
 
@@ -41,16 +41,16 @@ class TestCircle(unittest.TestCase):
         pass
 
     """
-    This method is used to unit test equality and non equality of 2 Circle classes defined by __eq__ and __ne__ methods. 
+    This method is used to unit test equality and non equality of 2 Circle classes defined by __eq__ and __ne__ methods.
     """
-    def test_point_equality(self):
+    def test_circle_equality(self):
         lat1 = 80.1
         lon1 = 160.2
         r = 5
 
         cr1 = self.circle
         cr2 = self.circle
-        cr3 = Circle(lon1, lat1, r)
+        cr3 = GeoShape.Circle(lon1, lat1, r)
         cr4 = None
 
         self.assertEqual(cr1, cr2)

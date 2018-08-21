@@ -21,22 +21,27 @@ __version__ = "0.0.1"
 __email__ = ["d.kanhar@gmail.com", "dekanhar@in.ibm.com"]
 
 
-from ..core.datatypes.GeoShape import Point, Circle
+from ..core.datatypes.GeoShape import Circle, Point
+from ..core.datatypes import GeoShape
 
 
 class GeoShapeDeserializer(object):
+    """
+    This class is used to De-serialize any GeoShape objects being returned from Gremlin Server.
+    """
     VALUE_KEY = "@value"
 
     @classmethod
     def objectify(cls, graphsonObj, reader):
         """
+            The De-serializer method to de-serialize a GeoShape into corresponding Python GeoShape object.
 
         Args:
-            graphsonObj (dict):
-            reader:
+            graphsonObj (dict): The serialized JSON returned from JanusGraph's gremlin-server.
+            reader : The reader class to use for de-serializing the GeoShape object.
 
         Returns:
-
+            GeoShape
         """
 
         if graphsonObj.get("geometry") is not None:
@@ -91,12 +96,13 @@ class GeoShapeDeserializer(object):
     @classmethod
     def __deserialize_points_from_coordinates(cls, coordinates):
         """
+            De-serializes coordinates json into list of coordinates so that GeoShape Point object
 
         Args:
-            coordinates (object):
+            coordinates (list): The co-ordinates to be used to generate a Point object
 
         Returns:
-            point (Point)
+            Point
         """
 
         coordList = list(coordinates)
@@ -109,30 +115,32 @@ class GeoShapeDeserializer(object):
     @classmethod
     def __get_point_from_coordinates(cls, coordinates):
         """
+            De-serializes Point object from co-ordinates
 
         Args:
             coordinates (list):
 
         Returns:
-            pt (Point)
+            Point
         """
 
         latitude = coordinates[0]
         longitude = coordinates[1]
 
-        pt = Point(longitude, latitude)
+        pt = GeoShape.Point(longitude, latitude)
 
         return pt
 
     @classmethod
     def __deserialize_circle_from_coordinates(cls, coordinates, radius):
         """
+            De-serializes coordinates json into list of coordinates and radius, so that a Circle object can be created.
 
         Args:
-            coordinates (object):
+            coordinates (list):
 
         Returns:
-            circle (Circle)
+            Circle
         """
 
         coordList = list(coordinates)
@@ -146,18 +154,19 @@ class GeoShapeDeserializer(object):
     @classmethod
     def __get_circle_from_coordinates(cls, coordinates, radius):
         """
+            Create Circle object from Co-ordinates and radius.
 
         Args:
             coordinates (list):
             radius (int):
 
         Returns:
-            cr (Circle)
+            Circle
         """
 
         latitude = coordinates[0]
         longitude = coordinates[1]
 
-        cr = Circle(longitude, latitude, radius)
+        cr = GeoShape.Circle(longitude, latitude, radius)
 
         return cr

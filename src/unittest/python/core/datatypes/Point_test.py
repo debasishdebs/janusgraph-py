@@ -2,7 +2,7 @@
 
 import unittest
 
-from janusgraph_python.core.datatypes.Point import Point
+from janusgraph_python.core.datatypes.GeoShape import GeoShape
 
 
 class TestPoint(unittest.TestCase):
@@ -11,7 +11,7 @@ class TestPoint(unittest.TestCase):
         self.latitude = 85.9
         self.longitude = 171.2
 
-        self.point = Point(self.longitude, self.latitude)
+        self.point = GeoShape.Point(self.longitude, self.latitude)
 
         pass
 
@@ -23,7 +23,7 @@ class TestPoint(unittest.TestCase):
         longitude = 181.2
 
         with self.assertRaises(ValueError):
-            Point(longitude, latitude)
+            GeoShape.Point(longitude, latitude)
         pass
 
     """
@@ -47,7 +47,7 @@ class TestPoint(unittest.TestCase):
 
         p1 = self.point
         p2 = self.point
-        p3 = Point(lon1, lat1)
+        p3 = GeoShape.Point(lon1, lat1)
 
         self.assertEqual(p1, p2)
         self.assertNotEqual(p1, p3)

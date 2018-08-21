@@ -11,7 +11,7 @@ name = "janusgraph_python"
 
 tinkerpop_version = "3.3.3"
 janusgraph_version = "0.3.0"
-version = "0.0.5.1"
+version = "0.0.6"
 
 use_plugin("python.core")
 # the python unittest plugin allows running python's standard library unittests
@@ -24,7 +24,9 @@ use_plugin("python.coverage")
 # for packaging purposes since we'll build a tarball
 use_plugin("python.distutils")
 # For generating Pycharm project files
-use_plugin('python.pycharm')
+use_plugin("python.pycharm")
+# For generating Docs from docstring using Spinx
+use_plugin("python.sphinx")
 
 default_task = ['clean', 'install_dependencies', 'publish', 'pycharm_generate']
 
@@ -38,12 +40,14 @@ def initialize(project):
     project.set_property("coverage_branch_threshold_warn", 60)
     project.set_property("coverage_branch_partial_threshold_warn", 70)
     project.set_property("coverage_allow_non_imported_modules", True)
-    project.set_property("coverage_exceptions", ["__init__",
-                         "janusgraph_python.core.attribute", "janusgraph_python.core.attribute.GeoPredicate.Geo",
-                         "janusgraph_python.core.attribute.TextPredicate.Text", "janusgraph_python.driver.ClientBuilder"])
+    project.set_property("coverage_exceptions", ["__init__"])
 
     project.set_property("unittest_test_method_prefix", "test")
     project.set_property("unittest_file_suffix", "_test")
+
+    project.set_property("sphinx_config_path", "docs/")
+    project.set_property("sphinx_source_dir", "docs/")
+    project.set_property("sphinx_output_dir", "docs/_build")
 
     project.set_property("dir_dist", "target/dist/" + project.name)
     project.depends_on("gremlinpython", "=={}".format(tinkerpop_version))

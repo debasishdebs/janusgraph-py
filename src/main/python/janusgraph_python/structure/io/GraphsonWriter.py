@@ -31,6 +31,11 @@ from ...core.datatypes.RelationIdentifier import RelationIdentifier
 
 
 class JanusGraphSONWriter(object):
+    """
+    This class registers JanusGraph specific serializers so that Python objects like GeoShape, RelationIdentifier
+    can be interpreted on Gremlin server side.
+    """
+
     serializers = dict()
 
     def __init__(self):
@@ -38,11 +43,24 @@ class JanusGraphSONWriter(object):
         pass
 
     def __register_default_serializers(self):
+        """
+            This method is used to register the Default serializers for JanusGraph's python client.
+            Currently the serializer registers GeoShape and RelationIdentifier classes.
+
+        Returns:
+
+        """
+
         janusSerializers = self.__build_serializers()
 
         self.serializers.update(janusSerializers)
 
     def __build_serializers(self):
+        """
+            The actual method which takes care of adding JanusGraph specific serializers.
+        Returns:
+            dict
+        """
         # Currently the default serializers registered.
 
         janusSerializers = {
@@ -54,13 +72,19 @@ class JanusGraphSONWriter(object):
         return janusSerializers
 
     def build(self):
+        """
+            The method registers JanusGraph specific serializers into Gremlin GraphSON Writer class.
+
+        Returns:
+            GraphSONWriter
+        """
         self.__register_default_serializers()
         self.writer = GraphSONWriter(self.serializers)
         return self.writer
 
     def register_serializer(self, typeClass, serializer):
         """
-
+            This method is used to registering any additional JanusGraph serializers.
         Args:
             typeClass (type):
             serializer:
