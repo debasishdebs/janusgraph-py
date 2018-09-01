@@ -15,7 +15,7 @@ limitations under the License.
 """
 
 __author__ = "Debasish Kanhar (https://github.com/debasishdebs)"
-__credits__ = ["Florian Hockman", "Jason Plurad", "Dave Brown", "Marko Rodriguez"]
+__credits__ = ["Florian Hockman", "Marko Rodriguez"]
 __license__ = "Apache-2.0"
 __version__ = "0.0.1"
 __email__ = ["d.kanhar@gmail.com", "dekanhar@in.ibm.com"]
@@ -76,7 +76,7 @@ class GeoShapeDeserializer(object):
 
                         circle = cls.__deserialize_circle_from_coordinates(coordinates, radius)
 
-                        return circle
+                        return circle.toString()
 
                     else:
                         raise NotImplementedError("Currently implemented De-serialization \
@@ -91,7 +91,7 @@ class GeoShapeDeserializer(object):
             coordinates = graphsonObj["coordinates"]
             point = cls.__deserialize_points_from_coordinates(coordinates)
 
-            return point
+            return point.toString()
 
     @classmethod
     def __deserialize_points_from_coordinates(cls, coordinates):

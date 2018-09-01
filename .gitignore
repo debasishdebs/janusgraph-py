@@ -9,6 +9,9 @@ __pycache__/
 # PyCharm / Git folders
 .idea/
 
+# VS Code folders
+.vscode/
+
 # Distribution / packaging
 .Python
 build/
@@ -68,7 +71,6 @@ instance/
 
 # Sphinx documentation
 docs/_build/
-docs/*.rst
 docs/_static/
 
 # PyBuilder

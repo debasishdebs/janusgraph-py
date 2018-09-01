@@ -21,7 +21,11 @@ __version__ = "0.0.1"
 __email__ = ["d.kanhar@gmail.com", "dekanhar@in.ibm.com"]
 
 
-from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
+try:
+    from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
+except ImportError:
+    from gremlin_python.structure.io.graphson import GraphSONUtil
+
 from ..core.datatypes.RelationIdentifier import RelationIdentifier
 
 
