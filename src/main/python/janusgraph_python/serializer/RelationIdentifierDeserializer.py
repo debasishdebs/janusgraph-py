@@ -47,4 +47,4 @@ class RelationIdentifierDeserializer(object):
 
         relationID = RelationIdentifier(relationID)
 
-        return relationID
+        return relationID.toString()

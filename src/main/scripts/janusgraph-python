@@ -35,17 +35,17 @@ if __name__ == '__main__':
     # edges = g.E().has("reason", Text.textContainsFuzzy("breezs")).next()
     # print(edges)
     #
-    # edges = g.E().has("reason", Text.textFuzzy("luves fresh breezs")).next()
-    # print(edges)
-    #
-    # edges = g.E().has("reason", Text.textContainsFuzzy("breezs")).has("reason", Text.textContains("loves")).valueMap().toList()
-    # print(edges)
-    #
-    # edges = g.E().has("reason", Text.textRegex('l[ov]*es\s*w[a-v]*')).valueMap().toList()
-    # print(edges)
-    #
-    # edges = g.E().has("reason", Text.textContainsRegex("br[ez]*s")).valueMap().toList()
-    # print(edges)
+    edges = g.E().has("reason", Text.textFuzzy("luves fresh breezs")).next()
+    print(edges)
+
+    edges = g.E().has("reason", Text.textContainsFuzzy("breezs")).has("reason", Text.textContains("loves")).valueMap(True).toList()
+    print(edges)
+
+    edges = g.E().has("reason", Text.textRegex('l[ov]*es\s*w[a-v]*')).valueMap(True).toList()
+    print(edges)
+
+    edges = g.E().has("reason", Text.textContainsRegex("br[ez]*s")).valueMap(True).toList()
+    print(edges)
     #
     # Now we add edge b/w the vertices created and retrieved.
     # Since we are going to add a GeoShape point specifying where the battle happened,

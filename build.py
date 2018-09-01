@@ -1,7 +1,7 @@
 # Name: Debasish Kanhar
 
 
-from pybuilder.core import use_plugin, init, Author
+from pybuilder.core import use_plugin, init, Author, task, depends
 
 authors = [Author("Debasish Kanhar", "dekanhar@in.ibm.com")]
 description = "Python client drivers for JanusGraph"
@@ -28,7 +28,8 @@ use_plugin("python.pycharm")
 # For generating Docs from docstring using Spinx
 use_plugin("python.sphinx")
 
-default_task = ['clean', 'install_dependencies', 'publish', 'pycharm_generate']
+# default_task = ['clean', 'install_dependencies', 'publish', 'pycharm_generate']
+default_task = ['clean', 'install_dependencies', 'prepare', 'compile_sources', 'pycharm_generate']
 
 # This is an initializer, a block of logic that runs before the project is built.
 @init
