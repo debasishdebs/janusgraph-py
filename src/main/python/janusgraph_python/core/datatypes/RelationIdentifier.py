@@ -52,7 +52,7 @@ class RelationIdentifier(object):
         return not self.__eq__(other)
 
     def __str__(self):
-        return self.toString()
+        return self.relationID
 
     def toDict(self):
         """

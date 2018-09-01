@@ -37,7 +37,7 @@ class Text(object):
         Returns:
             P
         """
-        predicate = P("textContainsFuzzy", value)
+        predicate = P("textContainsPrefix", value)
 
         return predicate
 
@@ -68,7 +68,7 @@ class Text(object):
             P
         """
 
-        predicate = P("textContainsPrefix", value)
+        predicate = P("textContainsRegex", value)
 
         return predicate
 

@@ -2,7 +2,10 @@
 
 import unittest
 import json
-from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
+try:
+    from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
+except ImportError:
+    from gremlin_python.structure.io.graphson import GraphSONUtil
 from janusgraph_python.structure.io.GraphsonReader import JanusGraphSONReader
 
 

@@ -20,8 +20,10 @@ __license__ = "Apache-2.0"
 __version__ = "0.0.1"
 __email__ = ["d.kanhar@gmail.com", "dekanhar@in.ibm.com"]
 
-
-from gremlin_python.structure.io.graphsonV3d0 import GraphSONWriter
+try:
+    from gremlin_python.structure.io.graphsonV3d0 import GraphSONWriter
+except ImportError:
+    from gremlin_python.structure.io.graphson import GraphSONWriter
 
 from ...serializer.PointSerializer import PointSerializer
 from ...serializer.CircleSerializer import CircleSerializer

@@ -25,22 +25,42 @@ if __name__ == '__main__':
         birds = g.addV("monster").property("name", "Debasish Kanhar").next()
 
     # Retrive hercules node, so that we can add a new edge to it.
-    # hercules = g.V().has("name", Text.textContainsFuzzy("herculeas")).next()
+    hercules = g.V().has("name", Text.textFuzzy("hercauleas")).next()
+    print(hercules)
 
+    # e = g.E().valueMap().toList()
+    # for i in range(len(e)):
+    #     print(e[i], " \n")
+    # print("==================")
+    # edges = g.E().has("reason", Text.textContainsFuzzy("breezs")).next()
+    # print(edges)
+    #
+    # edges = g.E().has("reason", Text.textFuzzy("luves fresh breezs")).next()
+    # print(edges)
+    #
+    # edges = g.E().has("reason", Text.textContainsFuzzy("breezs")).has("reason", Text.textContains("loves")).valueMap().toList()
+    # print(edges)
+    #
+    # edges = g.E().has("reason", Text.textRegex('l[ov]*es\s*w[a-v]*')).valueMap().toList()
+    # print(edges)
+    #
+    # edges = g.E().has("reason", Text.textContainsRegex("br[ez]*s")).valueMap().toList()
+    # print(edges)
+    #
     # Now we add edge b/w the vertices created and retrieved.
     # Since we are going to add a GeoShape point specifying where the battle happened,
     # First let us create the GeoShape obj
 
     # We define arcadia point by its lat and long
-    # arcadia = Point(21.50, 37.58)
+    arcadia = GeoShape.Point(21.50, 37.58)
     # We add arcadia POINT to our newly created edge.
-    # edgeAdded = g.V(birds).as_("to").V(hercules).addE("battled").property("time", 90).property("place", arcadia).to("to").next()
+    edgeAdded = g.V(birds).as_("to").V(hercules).addE("battled").property("time", 190).property("place", arcadia).to("to").next()
     #
-    # print(15 * "=")
-    # print("Testing retrival of Point shape")
-    # edgesH = g.V(birds).inE("battled").valueMap("place").next()
-    # print(edgesH)
-    # print(15 * "=")
+    print(15 * "=")
+    print("Testing retrival of Point shape")
+    edgesH = g.V(birds).inE("battled").has("time", 190).valueMap("place").next()
+    print(edgesH)
+    print(15 * "=")
     #
     # if g.V().has("name", "Rocky").count().next() > 0:
     #     v2 = g.V().has("name", "Rocky").next()
@@ -62,22 +82,22 @@ if __name__ == '__main__':
     # print(herculeasBattles)
     # print(15 * "=")
 
-    print(15 * "=")
-    print("Testing edge serialization")
-    id = g.E(g.E().id().next()).id().next()
-    print(id)
-    print(15 * "=")
+    # print(15 * "=")
+    # print("Testing edge serialization")
+    # id = g.E(g.E().id().next()).id().next()
+    # print(id)
+    # print(15 * "=")
 
     # Next I'm going to test GeoPredicates
     # shape = Circle(23, 37, 1000)
-    print(15 * "=")
-    shape = GeoShape.Circle(23, 37, 1000)
-    edges = g.V().has("name", Text.textContainsFuzzy("herculeas")).\
-                            outE().has("place", Geo.geoWithin(shape)).next()
-    herculesBattledWith = g.V().has("name", Text.textContainsFuzzy("herculeas")).\
-                            outE().has("place", Geo.geoWithin(shape)).inV().path().by(__.valueMap(True)).next()
-    print("Edges etrived using Geo Predicates")
-    pprint.pprint(herculesBattledWith)
-    print(15 * "=")
-    pprint.pprint(edges)
-    print(15 * "=")
+    # print(15 * "=")
+    # shape = GeoShape.Circle(23, 37, 1000)
+    # edges = g.V().has("name", Text.textContainsFuzzy("herculeas")).\
+    #                         outE().has("place", Geo.geoWithin(shape)).next()
+    # herculesBattledWith = g.V().has("name", Text.textContainsFuzzy("herculeas")).\
+    #                         outE().has("place", Geo.geoWithin(shape)).inV().path().by(__.valueMap(True)).next()
+    # print("Edges etrived using Geo Predicates")
+    # pprint.pprint(herculesBattledWith)
+    # print(15 * "=")
+    # pprint.pprint(edges)
+    # print(15 * "=")
