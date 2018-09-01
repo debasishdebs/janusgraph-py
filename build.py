@@ -15,11 +15,11 @@ version = "0.0.9"
 
 use_plugin("python.core")
 # the python unittest plugin allows running python's standard library unittests
-use_plugin("python.unittest")
+# use_plugin("python.unittest")
 # this plugin allows installing project dependencies with pip
 use_plugin("python.install_dependencies")
 # a plugin that measures unit test statement coverage
-use_plugin("python.coverage")
+# use_plugin("python.coverage")
 # use_plugin('pypi:pybuilder_pytest_coverage')
 # for packaging purposes since we'll build a tarball
 use_plugin("python.distutils")
