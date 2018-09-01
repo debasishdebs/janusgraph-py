@@ -9,8 +9,8 @@ from janusgraph_python.core.datatypes.Circle import Circle
 
 class TestGeoShapeDeserializer(unittest.TestCase):
     def setUp(self):
-        self.latitude = 80
-        self.longitude = 100
+        self.latitude = 80.0
+        self.longitude = 100.0
         self.radius = 5
 
         self.reader = JanusGraphSONReader().build()

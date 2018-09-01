@@ -40,19 +40,36 @@ class RelationIdentifier(object):
         Returns:
 
         """
-        if other is None:
-            return False
-        else:
+
+        if type(other) is str:
+            if other == self.toString():
+                return True
+
+        elif type(other) is RelationIdentifier:
             if self.relationID == other.relationID:
                 return True
             else:
                 return False
 
+        elif other is None:
+            return False
+
+        else:
+            return False
+        #
+        # if other is None:
+        #     return False
+        # else:
+        #     if self.relationID == other.relationID:
+        #         return True
+        #     else:
+        #         return False
+
     def __ne__(self, other):
         return not self.__eq__(other)
 
     def __str__(self):
-        return self.toString()
+        return self.relationID
 
     def toDict(self):
         """
