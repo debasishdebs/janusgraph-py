@@ -61,10 +61,7 @@ class JanusGraphClient(object):
 
         URL = "ws://{}:{}/gremlin".format(url, port)
 
-        print(kwargs)
-        print(URL)
-
-        if not kwargs:
+        if kwargs is None:
 
             graphson_reader = JanusGraphSONReader().build()
             graphson_writer = JanusGraphSONWriter().build()
