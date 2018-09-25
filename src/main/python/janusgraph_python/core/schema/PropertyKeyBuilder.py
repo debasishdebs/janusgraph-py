@@ -36,8 +36,8 @@ class PropertyKeyBuilder(SchemaBuilder):
         q = "if (mgmt.getPropertyKey('{}')) {{" \
             "   {} = mgmt.getPropertyKey('{}'); }}" \
             "else {{" \
-            "   {} = mgmt.makePropertyKey('{}').dataType({}.class).cardinality(Cardinality.{}).make(); }}\n".format(
-            self.property, self.property, self.property, self.property, self.property, self.dataType, self.card)
+            "   {} = mgmt.makePropertyKey('{}').dataType({}.class).cardinality({}).make(); }}\n".format(
+            self.property, self.property, self.property, self.property, self.property, self.data_type, self.card)
 
         self.query += q
 
