@@ -3,6 +3,8 @@
 from .SchemaBuilder import SchemaBuilder
 from .index.CompositeIndexBuilder import CompositeIndexBuilder
 from .index.MixedIndexBuilder import MixedIndexBuilder
+from .index.VertexCentricIndexBuilder import VertexCentricIndex
+from .Helpers import StringTemplate
 
 
 class IndexBuilder(SchemaBuilder):
@@ -24,7 +26,7 @@ class IndexBuilder(SchemaBuilder):
 
         query = "mgmt.buildIndex('{}', {}.class)".format(index_name, element)
 
-        composite_idx_builder = CompositeIndexBuilder(self.connection, query, index_name)
+        composite_idx_builder = CompositeIndexBuilder(self.connection, query, index_name, element)
 
         return composite_idx_builder
 
@@ -45,5 +47,10 @@ class IndexBuilder(SchemaBuilder):
 
         return mixed_index_builder
 
-    def buildVertexCentricIndex(self):
-        return
+    def buildVertexCentricIndex(self, index_name):
+        q = StringTemplate("mgmt.buildEdgeIndex({label}, '{index_name}', Direction.{dir}, Order.{odr}, {props});\n")
+        q.format(index_name=index_name)
+
+        vertex_centric_index_builder = VertexCentricIndex(self.connection, q, index_name)
+
+        return vertex_centric_index_builder

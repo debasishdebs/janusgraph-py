@@ -4,6 +4,7 @@
 from ..core.schema.PropertyKeyBuilder import PropertyKeyBuilder
 from ..core.schema.VertexLabelBuilder import VertexLabelBuilder
 from ..core.schema.EdgeLabelBuilder import EdgeLabelBuilder
+from ..core.schema.IndexBuilder import IndexBuilder
 
 
 class JanusGraphManagement(object):
@@ -21,4 +22,16 @@ class JanusGraphManagement(object):
 
     def edgeLabelBuilder(self):
         builder = EdgeLabelBuilder(self.connection)
+        return builder
+
+    def buildVertexCentricIndex(self, index_name):
+        builder = IndexBuilder(self.connection).buildVertexCentricIndex(index_name)
+        return builder
+
+    def buildCompositeIndex(self, index_name, element):
+        builder = IndexBuilder(self.connection).buildCompositeIndex(index_name, element)
+        return builder
+
+    def buildMixedIndex(self, index_name, element):
+        builder = IndexBuilder(self.connection).buildMixedIndex(index_name, element)
         return builder

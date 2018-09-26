@@ -17,6 +17,9 @@ class MixedIndexBuilder(SchemaBuilder):
         self.keys_added = None
         pass
 
+    def __str__(self):
+        return self.index_name
+
     def addKey(self, property_name, mapping):
 
         if not self.label_constraint:
@@ -49,7 +52,7 @@ class MixedIndexBuilder(SchemaBuilder):
 
         self.create(self.query)
 
-        return self.index_name
+        return self
 
     def create(self, query):
 
@@ -76,6 +79,8 @@ class MixedIndexBuilder(SchemaBuilder):
         q = helpers.close_graph_management()
         query += q
 
+        query += "graph.tx().commit();\n"
+        print(query)
         super().create(query)
 
         return self.index_name

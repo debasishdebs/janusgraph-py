@@ -1,5 +1,6 @@
 # Name: Debasish Kanhar
-# Emp ID: 05222V
+
+import string
 
 
 class Helpers(object):
@@ -24,3 +25,20 @@ class Helpers(object):
     def updateIndex(index_name):
         q = "mgmt.updateIndex(mgmt.getGraphIndex('{}'), SchemaAction.REINDEX).get();\n".format(index_name)
         return q
+
+
+class StringTemplate(object):
+    class FormatDict(dict):
+        def __missing__(self, key):
+            return "{" + key + "}"
+
+    def __init__(self, template):
+        self.substituted_str = template
+        self.formatter = string.Formatter()
+
+    def __repr__(self):
+        return self.substituted_str
+
+    def format(self, *args, **kwargs):
+        mapping = StringTemplate.FormatDict(*args, **kwargs)
+        self.substituted_str = self.formatter.vformat(self.substituted_str, (), mapping)

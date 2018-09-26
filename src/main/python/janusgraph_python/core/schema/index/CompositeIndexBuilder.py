@@ -5,7 +5,7 @@ from ..Helpers import Helpers as helpers
 
 
 class CompositeIndexBuilder(SchemaBuilder):
-    def __init__(self, connection, query, index_name):
+    def __init__(self, connection, query, index_name, element):
         """
 
         Args:
@@ -19,6 +19,7 @@ class CompositeIndexBuilder(SchemaBuilder):
         self.query = open_management + query
 
         self.index_name = index_name
+        self.element = element
 
         # Sanitation check params
         self.keys_added = None
@@ -28,12 +29,15 @@ class CompositeIndexBuilder(SchemaBuilder):
 
         pass
 
+    def __str__(self):
+        return self.index_name
+
     def addKey(self, property_name):
 
         if not self.label_constraint:
             self.keys_added = property_name
 
-            q = ".addKey({})".format(property_name)
+            q = ".addKey(mgmt.getPropertyKey('{}'))".format(property_name)
             self.query += q
 
         else:
@@ -46,7 +50,7 @@ class CompositeIndexBuilder(SchemaBuilder):
         if not self.unique_constraint:
             self.label_constraint = True
 
-            q = ".indexOnly({})".format(label)
+            q = ".indexOnly(mgmt.get{}Label('{}'))".format(self.element, label)
             self.query += q
         else:
             raise AttributeError("indexOnly() can't be invoked once unique() is already called")
@@ -79,7 +83,7 @@ class CompositeIndexBuilder(SchemaBuilder):
 
         self.create(self.query)
 
-        return self.index_name
+        return self
 
     def create(self, query):
 
@@ -106,6 +110,8 @@ class CompositeIndexBuilder(SchemaBuilder):
         q = helpers.close_graph_management()
         query += q
 
+        query += "graph.tx().commit();\n"
+        print(query)
         super().create(query)
 
         return self.index_name
