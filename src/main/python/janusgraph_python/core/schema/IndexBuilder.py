@@ -11,6 +11,8 @@ class IndexBuilder(SchemaBuilder):
     def __init__(self, connection):
         super(IndexBuilder, self).__init__(connection)
         self.connection = connection
+
+        self.query = "graph.tx().rollback();"
         pass
 
     def buildCompositeIndex(self, index_name, element):
@@ -26,7 +28,9 @@ class IndexBuilder(SchemaBuilder):
 
         query = "mgmt.buildIndex('{}', {}.class)".format(index_name, element)
 
-        composite_idx_builder = CompositeIndexBuilder(self.connection, query, index_name, element)
+        self.query += query
+
+        composite_idx_builder = CompositeIndexBuilder(self.connection, self.query, index_name, element)
 
         return composite_idx_builder
 
@@ -43,7 +47,9 @@ class IndexBuilder(SchemaBuilder):
 
         query = "mgmt.buildIndex('{}', {}.class)".format(index_name, element)
 
-        mixed_index_builder = MixedIndexBuilder(self.connection, query, index_name)
+        self.query += query
+
+        mixed_index_builder = MixedIndexBuilder(self.connection, self.query, index_name)
 
         return mixed_index_builder
 
@@ -51,6 +57,8 @@ class IndexBuilder(SchemaBuilder):
         q = StringTemplate("mgmt.buildEdgeIndex({label}, '{index_name}', Direction.{dir}, Order.{odr}, {props});\n")
         q.format(index_name=index_name)
 
-        vertex_centric_index_builder = VertexCentricIndex(self.connection, q, index_name)
+        query = StringTemplate(self.query + str(q))
+
+        vertex_centric_index_builder = VertexCentricIndex(self.connection, query, index_name)
 
         return vertex_centric_index_builder

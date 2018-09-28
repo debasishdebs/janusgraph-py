@@ -75,3 +75,8 @@ class JanusGraph(object):
         mgmt = JanusGraphManagement(self.management_connection)
 
         return mgmt
+
+    def close(self):
+        self.remote_connection.close()
+        self.management_connection.close()
+        return True
