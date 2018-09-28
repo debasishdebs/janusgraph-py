@@ -83,35 +83,4 @@ class CompositeIndexBuilder(SchemaBuilder):
 
         self.create(self.query)
 
-        return self
-    #
-    # def create(self, query):
-    #
-    #     i = helpers.REPEAT_AWAIT_AFTER_INDEX
-    #
-    #     while i:
-    #         q = helpers.open_graph_management()
-    #         query += q
-    #
-    #         q = helpers.awaitGraphIndexStatus(self.index_name)
-    #         query += q
-    #
-    #         q = helpers.close_graph_management()
-    #         query += q
-    #
-    #         i -= 1
-    #
-    #     q = helpers.open_graph_management()
-    #     query += q
-    #
-    #     q = helpers.updateIndex(self.index_name)
-    #     query += q
-    #
-    #     q = helpers.close_graph_management()
-    #     query += q
-    #
-    #     query += "graph.tx().commit();\n"
-    #     print(query)
-    #     super().create(query)
-    #
-    #     return self.index_name
+        return self.index_name

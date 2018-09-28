@@ -49,7 +49,7 @@ class IndexBuilder(SchemaBuilder):
 
         self.query += query
 
-        mixed_index_builder = MixedIndexBuilder(self.connection, self.query, index_name)
+        mixed_index_builder = MixedIndexBuilder(self.connection, self.query, index_name, element)
 
         return mixed_index_builder
 

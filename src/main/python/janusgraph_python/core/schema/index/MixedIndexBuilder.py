@@ -5,13 +5,14 @@ from ..Helpers import Helpers as helpers
 
 
 class MixedIndexBuilder(SchemaBuilder):
-    def __init__(self, connection, query, index_name):
+    def __init__(self, connection, query, index_name, element):
         super(MixedIndexBuilder, self).__init__(connection)
 
         open_management = helpers.open_graph_management()
         self.query = open_management + query
 
         self.index_name = index_name
+        self.element = element
 
         self.label_constraint = False
         self.keys_added = None
@@ -25,7 +26,7 @@ class MixedIndexBuilder(SchemaBuilder):
         if not self.label_constraint:
             self.keys_added = property_name
 
-            q = ".addKey({}, Mapping.{}.asParameter())".format(property_name, mapping)
+            q = ".addKey(mgmt.getPropertyKey('{}'), Mapping.{}.asParameter())".format(property_name, mapping)
             self.query += q
         else:
             raise AttributeError("addKey() can't be invoked once indexOnly() is already called")
@@ -36,7 +37,7 @@ class MixedIndexBuilder(SchemaBuilder):
 
         self.label_constraint = True
 
-        q = ".indexOnly({})".format(label)
+        q = ".indexOnly(mgmt.get{}Label('{}'))".format(self.element, label)
         self.query += q
 
         return self
@@ -52,35 +53,4 @@ class MixedIndexBuilder(SchemaBuilder):
 
         self.create(self.query)
 
-        return self
-    #
-    # def create(self, query):
-    #
-    #     # i = helpers.REPEAT_AWAIT_AFTER_INDEX
-    #     #
-    #     # while i:
-    #     #     q = helpers.open_graph_management()
-    #     #     query += q
-    #     #
-    #     #     q = helpers.awaitGraphIndexStatus(self.index_name)
-    #     #     query += q
-    #     #
-    #     #     q = helpers.close_graph_management()
-    #     #     query += q
-    #     #
-    #     #     i -= 1
-    #
-    #     # q = helpers.open_graph_management()
-    #     # query += q
-    #     #
-    #     # q = helpers.updateIndex(self.index_name)
-    #     # query += q
-    #     #
-    #     # q = helpers.close_graph_management()
-    #     # query += q
-    #
-    #     # query += "graph.tx().commit();\n"
-    #     print(query)
-    #     super().create(query)
-    #
-    #     return self.index_name
+        return self.index_name
