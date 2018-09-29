@@ -80,3 +80,13 @@ class JanusGraph(object):
         self.remote_connection.close()
         self.management_connection.close()
         return True
+
+    def drop(self):
+        query = "JanusGraphFactory.drop(graph);"
+        result_set = self.management_connection.submit(query)
+        future_results = result_set.all()
+        results = future_results.result()
+
+        self.close()
+
+        return results
