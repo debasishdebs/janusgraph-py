@@ -15,6 +15,4 @@
 
 from .Text import Text
 
-"""
-This module contains Predicates to query JanusGraph based on Text properties like Fuzzy, Regex etc.
-"""
+# This module contains Predicates to query JanusGraph based on Text properties like Fuzzy, Regex etc.

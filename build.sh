@@ -61,7 +61,7 @@ fi
 if [ "${build}" == "true" ]
 then
   echo "Building library"
-  chmod +x build.sh
+  chmod +x build-library.sh
   ./build-library.sh "${ENV_NAME}"
 fi
 

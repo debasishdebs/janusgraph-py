@@ -15,6 +15,4 @@
 
 from .Geo import Geo
 
-"""
-This module contains Predicate classes to query JanusGraph based on GeoShapes. 
-"""
+# This module contains Predicate classes to query JanusGraph based on GeoShapes.
