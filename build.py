@@ -24,7 +24,7 @@ name = "janusgraph_python"
 
 tinkerpop_version = "3.3.3"
 janusgraph_version = "0.3.0"
-version = "0.0.9"
+version = "0.3.0000"
 
 use_plugin("python.core")
 # the python unittest plugin allows running python's standard library unittests
@@ -61,3 +61,4 @@ def initialize(project):
 
     project.set_property("dir_dist", "target/dist/" + project.name)
     project.depends_on("gremlinpython", "=={}".format(tinkerpop_version))
+
