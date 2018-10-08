@@ -118,7 +118,7 @@ class GeoShapeDeserializer(object):
         latitude = coordinates[0]
         longitude = coordinates[1]
 
-        pt = GeoShape.Point(longitude, latitude)
+        pt = GeoShape.Point(latitude, longitude)
 
         return pt
 
@@ -158,6 +158,6 @@ class GeoShapeDeserializer(object):
         latitude = coordinates[0]
         longitude = coordinates[1]
 
-        cr = GeoShape.Circle(longitude, latitude, radius)
+        cr = GeoShape.Circle(latitude, longitude, radius)
 
         return cr

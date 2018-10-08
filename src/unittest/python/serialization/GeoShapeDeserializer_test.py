@@ -37,7 +37,7 @@ class TestGeoShapeDeserializer(unittest.TestCase):
 
         expectedPoint = self.reader.toObject(pointJSON)
 
-        actualPoint = Point(self.longitude, self.latitude)
+        actualPoint = Point(self.latitude, self.longitude)
 
         self.assertEqual(expectedPoint, actualPoint)
         pass
@@ -65,6 +65,6 @@ class TestGeoShapeDeserializer(unittest.TestCase):
 
         expectedCircle = self.reader.toObject(circleJSON)
 
-        actualCircle = Circle(self.longitude, self.latitude, self.radius)
+        actualCircle = Circle(self.latitude, self.longitude, self.radius)
 
         self.assertEqual(expectedCircle, actualCircle)

@@ -14,7 +14,7 @@
 
 
 class Point(object):
-    def __init__(self, longitude, latitude):
+    def __init__(self, latitude, longitude):
         """
             The actual class representing Geographical Point/Geometrical Point.
         Args:

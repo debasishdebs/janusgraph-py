@@ -27,7 +27,7 @@ class TestCircleSerialization(unittest.TestCase):
         self.longitude = 100
         self.radius = 5
 
-        self.circle = Circle(self.longitude, self.latitude, self.radius)
+        self.circle = Circle(self.latitude, self.longitude, self.radius)
 
         self.writer = JanusGraphSONWriter().build()
         pass

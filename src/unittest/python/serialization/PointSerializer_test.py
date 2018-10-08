@@ -26,7 +26,7 @@ class TestCircleSerialization(unittest.TestCase):
         self.latitude = 80
         self.longitude = 100
 
-        self.point = Point(self.longitude, self.latitude)
+        self.point = Point(self.latitude, self.longitude)
 
         self.writer = JanusGraphSONWriter().build()
         pass

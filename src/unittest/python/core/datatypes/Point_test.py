@@ -24,7 +24,7 @@ class TestPoint(unittest.TestCase):
         self.latitude = 85.9
         self.longitude = 171.2
 
-        self.point = GeoShape.Point(self.longitude, self.latitude)
+        self.point = GeoShape.Point(self.latitude, self.longitude)
 
         pass
 
@@ -36,7 +36,7 @@ class TestPoint(unittest.TestCase):
         longitude = 181.2
 
         with self.assertRaises(ValueError):
-            GeoShape.Point(longitude, latitude)
+            GeoShape.Point(latitude, longitude)
         pass
 
     """
@@ -60,7 +60,7 @@ class TestPoint(unittest.TestCase):
 
         p1 = self.point
         p2 = self.point
-        p3 = GeoShape.Point(lon1, lat1)
+        p3 = GeoShape.Point(lat1, lon1)
 
         self.assertEqual(p1, p2)
         self.assertNotEqual(p1, p3)

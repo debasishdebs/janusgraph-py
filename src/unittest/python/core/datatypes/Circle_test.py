@@ -24,7 +24,7 @@ class TestCircle(unittest.TestCase):
         self.longitude = 171.2
         self.radius = 5
 
-        self.circle = GeoShape.Circle(self.longitude, self.latitude, self.radius)
+        self.circle = GeoShape.Circle(self.latitude, self.longitude, self.radius)
 
         pass
 
@@ -37,7 +37,7 @@ class TestCircle(unittest.TestCase):
         radius = 0
 
         with self.assertRaises(ValueError):
-            GeoShape.Circle(longitude, latitude, radius)
+            GeoShape.Circle(latitude, longitude, radius)
         pass
 
     """
@@ -62,7 +62,7 @@ class TestCircle(unittest.TestCase):
 
         cr1 = self.circle
         cr2 = self.circle
-        cr3 = GeoShape.Circle(lon1, lat1, r)
+        cr3 = GeoShape.Circle(lat1, lon1, r)
         cr4 = None
 
         self.assertEqual(cr1, cr2)

@@ -14,7 +14,7 @@
 
 
 class Circle(object):
-    def __init__(self, longitude, latitude, radiusInKM):
+    def __init__(self, latitude, longitude, radiusInKM):
         """
             The actual class representing Geographical Circle.
 

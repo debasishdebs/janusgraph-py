@@ -23,35 +23,36 @@ class GeoShape(object):
     """
 
     @staticmethod
-    def Point(longitude, latitude):
+    def Point(latitude, longitude):
         """
         This is wrapper method to call the actual Geographical Point class.
 
         Args:
-            longitude (float): The longitude of Point
             latitude (float): The latitude of Point
+            longitude (float): The longitude of Point
 
         Returns:
             Point
         """
 
-        point = Point(longitude, latitude)
+        point = Point(latitude, longitude)
 
         return point
 
     @staticmethod
-    def Circle(longitude, latitude, radiusInKM):
+    def Circle(latitude, longitude, radiusInKM):
         """
-            This is wrapper method to call the actual Geographical Circle class.
+        This is wrapper method to call the actual Geographical Circle class.
+
         Args:
-            longitude (float): The longitude of Circle center
             latitude (float): The latitude of Circle center
+            longitude (float): The longitude of Circle center
             radiusInKM (int): The radius, in Kilometers of Circle
 
         Returns:
             Circle
         """
 
-        circle = Circle(longitude, latitude, radiusInKM)
+        circle = Circle(latitude, longitude, radiusInKM)
 
         return circle
