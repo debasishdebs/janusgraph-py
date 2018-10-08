@@ -30,8 +30,22 @@ from janusgraph_python.structure.io.GraphsonReader import JanusGraphSONReader
 from gremlin_python.structure.graph import Graph
 import pprint
 
+from gremlin_python.driver import client
+
+
+from janusgraph_python.driver.JanusGraphManagement import JanusGraphManagement
+
 
 if __name__ == '__main__':
+    connection = JanusGraphClient().connect(url="9.42.65.81", port="8182", graph="g").get_connection()
+
+    mgmt = JanusGraphManagement(connection)
+
+    property_builder = mgmt.propertyKeyBuilder()
+    prop = property_builder.makePropertKey("testProp").dataType("Integer").cardinality("LIST").make()
+
+
+if __name__ == '__main1__':
 
     geoshape_identifier = "Geoshape"
 

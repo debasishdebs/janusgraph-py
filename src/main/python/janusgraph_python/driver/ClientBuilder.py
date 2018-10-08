@@ -87,3 +87,4 @@ class JanusGraphClient(object):
         """
 
         return self.REMOTE_CONNECTION
+
