@@ -13,10 +13,7 @@
 # limitations under the License.
 
 
-"""
-This module contains various Predicate Attributes needed to query JanusGraph.
-This module contains attribute for GeoPredicate and TextPredicates
-"""
-
+# This module contains attribute for GeoPredicate and TextPredicates based queries to JanusGraph
+#
 from .GeoPredicate import Geo
 from .TextPredicate import Text

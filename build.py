@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-from pybuilder.core import use_plugin, init, Author, task, depends
+from pybuilder.core import use_plugin, init, Author
 
 authors = [Author("Debasish Kanhar", "dekanhar@in.ibm.com")]
 description = "Python client drivers for JanusGraph"
@@ -24,7 +24,7 @@ name = "janusgraph_python"
 
 tinkerpop_version = "3.3.3"
 janusgraph_version = "0.3.0"
-version = "0.3.0000"
+version = "0.3.0001"
 
 use_plugin("python.core")
 # the python unittest plugin allows running python's standard library unittests
