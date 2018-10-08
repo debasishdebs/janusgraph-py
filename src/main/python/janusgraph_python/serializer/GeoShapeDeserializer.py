@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-from ..core.datatypes.GeoShape import Circle, Point
 from ..core.datatypes import GeoShape
 
 
