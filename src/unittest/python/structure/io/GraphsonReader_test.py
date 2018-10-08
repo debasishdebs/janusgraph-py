@@ -15,7 +15,6 @@
 
 import unittest
 import json
-from gremlin_python.structure.io.graphsonV3d0 import GraphSONUtil
 from janusgraph_python.structure.io.GraphsonReader import JanusGraphSONReader
 
 
