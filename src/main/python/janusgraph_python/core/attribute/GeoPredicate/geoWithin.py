@@ -44,3 +44,4 @@ class GeoWithin(object):
         withinP = P(self.toString(), value)
 
         return withinP
+
