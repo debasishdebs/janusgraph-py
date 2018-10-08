@@ -41,3 +41,4 @@ class EdgeLabelBuilder(SchemaBuilder):
         self.create(self.query)
 
         return self.label
+

@@ -53,3 +53,4 @@ class JanusGraphManagement(object):
     def updateIndex(self, index_name):
         builder = UpdateIndex(self.connection, index_name)
         return builder
+

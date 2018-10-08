@@ -36,3 +36,4 @@ class VertexLabelBuilder(SchemaBuilder):
         self.create(self.query)
 
         return self.label
+
