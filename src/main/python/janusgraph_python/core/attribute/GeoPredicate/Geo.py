@@ -14,7 +14,7 @@
 
 
 from .GeoContains import GeoContains
-from .GeoWithin import GeoWithin
+from .GeoWithin_ import GeoWithin
 from ...datatypes.GeoShape import GeoShape
 
 
