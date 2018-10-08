@@ -35,7 +35,7 @@ python --version
 # for API docs
 sphinx-apidoc -o docs/ src/main/python/janusgraph_python > /dev/null
 # Generate HTML files from .rst files
-pyb sphinx_generate_documentation
+pyb sphinx_generate_documentation -v
 
 cd docs
 

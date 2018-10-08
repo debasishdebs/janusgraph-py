@@ -34,7 +34,7 @@ source "${python_path}"
 python --version
 
 # For building the library
-pyb
+pyb -v
 
 case $(uname -s) in
     MINGW*)     source deactivate;;
