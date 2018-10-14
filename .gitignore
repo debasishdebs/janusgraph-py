@@ -8,7 +8,7 @@ __pycache__/*.*
 .idea/
 
 # Script files
-src/main/scripts/
+src/main/scripts/janusgraph*
 
 # VS Code folders
 .vscode/
@@ -39,6 +39,3 @@ target/
 
 # mkdocs documentation
 /site
-
-# scripts files
-src/main/scripts/janusgraph-python

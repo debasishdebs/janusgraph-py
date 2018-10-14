@@ -17,7 +17,7 @@ class PropertyKeyBuilder(SchemaBuilder):
         self.property = None
         pass
 
-    def makePropertKey(self, property_name):
+    def makePropertyKey(self, property_name):
         self.property = property_name
         return self
 
@@ -38,6 +38,9 @@ class PropertyKeyBuilder(SchemaBuilder):
             "else {{" \
             "   {} = mgmt.makePropertyKey('{}').dataType({}.class).cardinality({}).make(); }}\n".format(
             self.property, self.property, self.property, self.property, self.property, self.data_type, self.card)
+
+        # q = "{} = mgmt.getOrCreatePropertyKey('{}').dataType({}.class).cardinality({}).make();\n".format(
+        #     self.property, self.property, self.data_type, self.card)
 
         self.query += q
 

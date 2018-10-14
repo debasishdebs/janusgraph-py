@@ -13,7 +13,8 @@ class EdgeLabelBuilder(SchemaBuilder):
         self.query += helpers.open_graph_management()
 
         self.label = None
-        self.multiplicity = "MULTI"
+        self.mult = None
+        self.sign = None
         pass
 
     def makeEdgeLabel(self, label):
@@ -21,18 +22,35 @@ class EdgeLabelBuilder(SchemaBuilder):
         return self
 
     def multiplicity(self, mult):
-        self.multiplicity = mult
+        self.mult = mult
+        return self
+
+    def signature(self, property):
+        self.sign = property
         return self
 
     def make(self):
         if self.label is None:
             raise AttributeError("makeVertexLabel() method needs called before make()")
 
-        q = "if (mgmt.getEdgeLabel('{}')) {{" \
-            "   {} = mgmt.getEdgeLabel('{}'); }}" \
-            "else {{" \
-            "   {} = mgmt.makeEdgeLabel('{}').multiplicity({}).make(); }}\n".format(
-                self.label, self.label, self.label, self.label, self.label, self.multiplicity)
+        if self.mult is not None and self.sign is None:
+            qq = "{} = mgmt.makeEdgeLabel('{}').multiplicity({}).make();".format(self.label, self.label,
+                                                                                   self.mult)
+        elif self.mult is None and self.sign is None:
+            qq = "{} = mgmt.makeEdgeLabel('{}').make();".format(self.label, self.label)
+
+        elif self.mult is None and self.sign is not None:
+            qq = "{} = mgmt.makeEdgeLabel('{}').signature(mgmt.getPropertyKey('{}')).make();".format(
+                                self.label, self.label, self.sign)
+        else:
+            qq = "{} = mgmt.makeEdgeLabel('{}').\
+                    signature(mgmt.getPropertyKey('{}')).multiplicity({}).make();".format(self.label,self.label,
+                                                                                                self.sign, self.mult)
+
+        q = "if (mgmt.getEdgeLabel('"+self.label+"')) {" \
+            "   "+self.label+" = mgmt.getEdgeLabel('"+self.label+"'); }" \
+            "else {" \
+            "   " + qq + " }\n"
 
         self.query += q
 

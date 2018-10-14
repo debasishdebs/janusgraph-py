@@ -29,6 +29,8 @@ class VertexLabelBuilder(SchemaBuilder):
             "{} = mgmt.makeVertexLabel('{}').make(); }}\n".format(self.label,
                                                                   self.label, self.label, self.label, self.label)
 
+        # q = "{} = mgmt.getOrCreateVertexLabel('{}').make();\n".format(self.label, self.label)
+
         self.query += q
 
         self.query += helpers.close_graph_management()

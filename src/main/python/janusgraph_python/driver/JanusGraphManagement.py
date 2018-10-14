@@ -7,6 +7,7 @@ from ..core.schema.EdgeLabelBuilder import EdgeLabelBuilder
 from ..core.schema.IndexBuilder import IndexBuilder
 from ..core.schema.index.AwaitGraphIndex import AwaitGraphIndex
 from ..core.schema.index.UpdateIndex import UpdateIndex
+from ..core.schema.ManagementExecutors import ManagementExecutors
 
 from gremlin_python.driver.client import Client
 
@@ -20,6 +21,7 @@ class JanusGraphManagement(object):
         """
 
         self.connection = connection
+        self.executor = ManagementExecutors(connection)
         pass
 
     def propertyKeyBuilder(self):
@@ -53,3 +55,13 @@ class JanusGraphManagement(object):
     def updateIndex(self, index_name):
         builder = UpdateIndex(self.connection, index_name)
         return builder
+
+    def getOpenInstances(self):
+        instances = self.executor.getOpenInstances()
+        return instances
+
+    def forceCloseInstance(self, instance_id):
+        self.executor.forceCloseInstance(instance_id)
+
+    def commit(self):
+        self.executor.commit()

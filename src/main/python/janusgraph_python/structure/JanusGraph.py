@@ -92,3 +92,15 @@ class JanusGraph(object):
         self.close()
 
         return results
+
+    def commit(self):
+        query = "graph.tx().commit();"
+        print(query)
+
+        result_set = self.management_connection.submit(query)
+        future_results = result_set.all()
+        results = future_results.result()
+
+        self.close()
+
+        return results

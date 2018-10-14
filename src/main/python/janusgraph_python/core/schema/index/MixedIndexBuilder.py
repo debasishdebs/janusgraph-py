@@ -26,7 +26,12 @@ class MixedIndexBuilder(SchemaBuilder):
         if not self.label_constraint:
             self.keys_added = property_name
 
-            q = ".addKey(mgmt.getPropertyKey('{}'), Mapping.{}.asParameter())".format(property_name, mapping)
+            if mapping is not None:
+                q = ".addKey(mgmt.getPropertyKey('{}'), Mapping.{}.asParameter())".format(property_name, mapping)
+            else:
+                q = ".addKey(mgmt.getPropertyKey('{}'))".format(property_name)
+                pass
+
             self.query += q
         else:
             raise AttributeError("addKey() can't be invoked once indexOnly() is already called")
