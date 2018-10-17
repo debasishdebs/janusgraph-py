@@ -29,7 +29,7 @@ esac
 
 source "${python_path}"
 
-python --version
+python3 --version
 
 # Auto-generate .rst files from docstrings of Python files. The .rst files are then used to generate html files
 # for API docs

@@ -43,7 +43,7 @@ if [ -z "${1:-}" ]; then
   echo "Building with defaults $0 -d true -b true -i false"
 fi
 
-pip install virtualenv
+pip3 install virtualenv
 
 virtualenv "${ENV_NAME}"
 
@@ -69,7 +69,7 @@ if [ "${install}" == "true" ]
 then
   echo "Installing library"
   # Install the library
-  python -m pip install target/dist/janusgraph_python/dist/janusgraph_python-*.tar.gz
+  python3 -m pip install target/dist/janusgraph_python/dist/janusgraph_python-*.tar.gz
 fi
 
 # Remove all files for temp environment, as that is already deactivated

@@ -29,8 +29,8 @@ esac
 
 source "${python_path}"
 
-python -m pip install pybuilder > /dev/null
-python -m pip install sphinx > /dev/null
+python3 -m pip install pybuilder > /dev/null
+python3 -m pip install sphinx > /dev/null
 
 case $(uname -s) in
     MINGW*)     source deactivate;;

@@ -31,9 +31,7 @@ esac
 
 source "${python_path}"
 
-python --version
-
-ls src/main/python/janusgraph_python/core/attribute/GeoPredicate
+python3 --version
 
 # For building the library
 pyb -v
